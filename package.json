@@ -7,5 +7,5 @@
   "author": "Phong Duong <s2pkmol@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["projects/admin-cms"]
+  "workspaces": ["projects/*"]
 }
