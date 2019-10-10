@@ -1,0 +1,16 @@
+extends utils/layout.pug
+
+block content
+  h1(class="text-center") New project
+  form(action="/project/new", method="post")
+    .form-group
+      label(for="title") Title
+      input#title(type="text"  name="title" class="form-control" placeholder="Title")
+    .form-group
+      label(for="description") Description
+      textarea#description(name="description" class="form-control" placeholder="Description" rows="3")
+    .form-group
+      label(for="link") Google Play link
+      input#link(type="url" name="link" class="form-control" placeholder="Link")
+    button(type="submit" class="btn btn-primary") Create
+
