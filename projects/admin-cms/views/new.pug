@@ -5,12 +5,20 @@ block content
   form(action="/project/new", method="post")
     .form-group
       label(for="title") Title
-      input#title(type="text"  name="title" class="form-control" placeholder="Title")
+        span(class="required")
+      input#title(type="text"  name="title" class="form-control" placeholder="Title" required)
     .form-group
       label(for="description") Description
-      textarea#description(name="description" class="form-control" placeholder="Description" rows="3")
+        span(class="required")
+      textarea#description(name="description" class="form-control" placeholder="Description" rows="3" required)
     .form-group
       label(for="link") Google Play link
-      input#link(type="url" name="link" class="form-control" placeholder="Link")
+        span(class="required")
+      input#link(type="url" name="link" class="form-control" placeholder="Link" required)
+    h3 Screenshots 
+    .row(class="mb-2 screenshots" style={height: "150px"})
+      - for (var i = 0; i < 4; i++)
+        div(class="col-6 col-md-3 screenshots__item")
+          div(class="bg-light border h-100")    
     button(type="submit" class="btn btn-primary") Create
 
