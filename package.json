@@ -1,0 +1,11 @@
+{
+  "name": "koogio",
+  "version": "1.0.0",
+  "description": "KOOGIO collection source code",
+  "main": "index.js",
+  "repository": "https://github.com/phongduong/koogio",
+  "author": "Phong Duong <s2pkmol@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["projects/*"]
+}
