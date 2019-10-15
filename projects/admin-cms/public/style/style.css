@@ -1,4 +1,7 @@
-.screenshots__item {
+.screenshots__list {
+  height: 150px;
+}
+.screenshots__list__item {
   cursor: pointer;
 }
 
