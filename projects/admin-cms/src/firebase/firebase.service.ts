@@ -12,7 +12,7 @@ export class FirebaseService {
     admin.initializeApp(this.serviceAccount);
   }
 
-  getBucket() {
-    return admin.storage().bucket("koogio")
+  getBucket(name: string) {
+    return admin.storage().bucket(name);
   }
 }

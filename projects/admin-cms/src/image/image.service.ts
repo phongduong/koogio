@@ -6,8 +6,12 @@ export class ImageService {
   private readonly bucket;
 
   constructor(private readonly firebaseService: FirebaseService) {
-    this.bucket = firebaseService.getBucket()
+    this.bucket = firebaseService.getBucket('screenshots');
   }
 
-  upload(image) {}
+  upload(images) {
+    const paths = images.map(image => image.path);
+
+    this.bucket.upload(paths, (err, files, apiResponse) => {});
+  }
 }
