@@ -1,5 +1,9 @@
 .screenshots {
-  &__item {
-    cursor: pointer;
+  &__list {
+    height: 150px;
+
+    &__item {
+      cursor: pointer;
+    }
   }
 }

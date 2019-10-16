@@ -5,6 +5,6 @@ export class AppController {
   @Get()
   @Render('index')
   root() {
-    return { title: "Homepage", message: 'Hello world!' };
+    return { title: 'Homepage' };
   }
 }
