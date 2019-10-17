@@ -6,12 +6,29 @@ export class ImageService {
   private readonly bucket;
 
   constructor(private readonly firebaseService: FirebaseService) {
-    this.bucket = firebaseService.getBucket('screenshots');
+    this.bucket = firebaseService.getBucket();
   }
 
-  upload(images) {
+  async upload(images): Promise<any[]> {
     const paths = images.map(image => image.path);
 
-    this.bucket.upload(paths, (err, files, apiResponse) => {});
+    try {
+      const response = await Promise.all(
+        paths.map(async path => this.bucket.upload(path)),
+      );
+      const urls = await Promise.all(
+        paths.map(async path =>
+          this.bucket.file(path).getSignedUrl({
+            version: 'v4',
+            action: 'read',
+            expires: '12-12-2500',
+          }),
+        ),
+      );
+
+      return [];
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

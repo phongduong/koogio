@@ -21,7 +21,9 @@ export class ImageController {
 
   @Post('upload')
   @UseInterceptors(FilesInterceptor('screenshots', 4, { storage }))
-  uploadFile(@UploadedFiles() files) {
-    this.imageService.upload(files);
+  async uploadFile(@UploadedFiles() files): Promise<any[]> {
+    const uploadedFiles = await this.imageService.upload(files);
+
+    return [];
   }
 }

@@ -9,10 +9,13 @@ export class FirebaseService {
   constructor(config: ConfigService) {
     this.serviceAccount = JSON.parse(config.get('SERVICE_ACCOUNT'));
 
-    admin.initializeApp(this.serviceAccount);
+    admin.initializeApp({
+      credential: admin.credential.cert(this.serviceAccount),
+      storageBucket: 'gs://koogio.appspot.com/',
+    });
   }
 
-  getBucket(name: string) {
-    return admin.storage().bucket(name);
+  getBucket() {
+    return admin.storage().bucket();
   }
 }
