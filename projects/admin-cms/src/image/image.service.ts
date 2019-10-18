@@ -11,24 +11,12 @@ export class ImageService {
 
   async upload(images): Promise<any[]> {
     const paths = images.map(image => image.path);
+    const uploadOptions = { gzip: true, public: true };
 
-    try {
-      const response = await Promise.all(
-        paths.map(async path => this.bucket.upload(path)),
-      );
-      const urls = await Promise.all(
-        paths.map(async path =>
-          this.bucket.file(path).getSignedUrl({
-            version: 'v4',
-            action: 'read',
-            expires: '12-12-2500',
-          }),
-        ),
-      );
-
-      return [];
-    } catch (error) {
-      console.log(error);
-    }
+    return await Promise.all(
+      paths.map(path => this.bucket.upload(path, uploadOptions)),
+    )
+      .then(response => response.map(file => file[1]))
+      .then(files => files.map(file => file.mediaLink));
   }
 }

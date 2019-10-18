@@ -3,6 +3,8 @@ import {
   Post,
   UploadedFiles,
   UseInterceptors,
+  Res,
+  HttpStatus,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ImageService } from './image.service';
@@ -21,9 +23,14 @@ export class ImageController {
 
   @Post('upload')
   @UseInterceptors(FilesInterceptor('screenshots', 4, { storage }))
-  async uploadFile(@UploadedFiles() files): Promise<any[]> {
-    const uploadedFiles = await this.imageService.upload(files);
-
-    return [];
+  async uploadFile(@Res() res, @UploadedFiles() files): Promise<any[]> {
+    return await this.imageService
+      .upload(files)
+      .then(urls => res.json({ urls }))
+      .catch(error =>
+        res
+          .status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json({ error: error.message }),
+      );
   }
 }

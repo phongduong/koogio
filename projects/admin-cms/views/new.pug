@@ -18,11 +18,8 @@ block content
     .screenshots
       h3 Screenshots 
       input(type="file" id="screenshot__input" class="screenshots__input" multiple)
-      .row(class="mb-2 screenshots__list")
-        - for (var i = 0; i < 4; i++)
-          div(class="col-6 col-md-3 screenshots__list__item" class=`screenshots__list__item__${i}`)
-            div(class="bg-light border h-100")  
+      .row(class="mb-2 p-2 border screenshots__list" id="screenshots__list") 
     button(type="submit" class="btn btn-primary") Create
 
-block scripts
+append scripts
   script(src="scripts/screenshots.js")
