@@ -1,8 +1,13 @@
-.screenshots__list {
-  height: 150px;
-}
 .screenshots__list__item {
   cursor: pointer;
+  height: 250px;
+}
+.screenshots__list__item div {
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,9 +1,16 @@
 .screenshots {
   &__list {
-    height: 150px;
-
     &__item {
       cursor: pointer;
+      height: 250px;
+
+      div {
+        background-size: contain;
+        background-position: top;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
