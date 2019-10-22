@@ -5,20 +5,22 @@ block content
   form(method="post")
     .form-group
       label(for="title") Title
-        span(class="required")
       input#title(type="text"  name="title" class="form-control" placeholder="Title" required)
     .form-group
       label(for="description") Description
-        span(class="required")
       textarea#description(name="description" class="form-control" placeholder="Description" rows="3" required)
     .form-group
       label(for="link") Google Play link
-        span(class="required")
       input#link(type="url" name="link" class="form-control" placeholder="Link" required)
+    .form-group
+      label(for="icon") Icon
+      input#icon(type="file" name="icon" class="form-control" required)
+    .form-group
+      label(for="screenshots") Screenshots
+        span(class="required")
+      input#screenshots(type="file" name="screenshots" class="form-control" required multiple)
     .screenshots
-      h3 Screenshots 
-      input(type="file" id="screenshot__input" class="screenshots__input" multiple)
-      .row(class="mb-2 p-2 border screenshots__list" id="screenshots__list") 
+      .row(class="mb-2 p-2 screenshots__list" id="screenshots__list") 
     button(type="submit" class="btn btn-primary") Create
 
 append scripts
