@@ -1,5 +1,6 @@
 const { POST } = window;
-const parentNode = document.querySelector('#screenshots__list');
+const screenshotsParentNode = document.querySelector('#screenshots__list');
+const iconParentNode = document.querySelector('.icon');
 let urls = [];
 
 document.querySelector('#screenshots').addEventListener('change', async e => {
@@ -9,15 +10,15 @@ document.querySelector('#screenshots').addEventListener('change', async e => {
   const formData = new FormData();
 
   for (let i = 0; i < files.length; i++) {
-    formData.append('screenshots', files[i]);
+    formData.append('files', files[i]);
   }
 
   try {
-    const response = await POST('/image/upload/screenshots', formData);
-    const result = await response.json();
-    screenshotURLs = result.urls;
+    const response = await POST('/image/upload', formData);
+    const { urls } = await response.json();
+    screenshotURLs = urls;
 
-    draw(parentNode, screenshotURLs);
+    drawScreenshotList(screenshotsParentNode, screenshotURLs);
   } catch (error) {
     console.error(error);
   }
@@ -25,14 +26,20 @@ document.querySelector('#screenshots').addEventListener('change', async e => {
 
 document.querySelector('#icon').addEventListener('change', async e => {
   const {
-    target: { files },
+    target: {
+      files: [icon],
+    },
   } = e;
   const formData = new FormData();
-  formData.append('icon', formData);
+  formData.append('files', icon);
 
   try {
-    const response = await POST('/image/upload/icon', formData);
-    const result = await response.json();
+    const response = await POST('/image/upload', formData);
+    const {
+      urls: [url],
+    } = await response.json();
+
+    drawIcon(iconParentNode, url);
   } catch (error) {
     console.error(error);
   }
@@ -51,12 +58,12 @@ const drop = (e, currentURL) => {
   });
   screenshotURLs = [...newScreenshotURLS];
 
-  draw(parentNode, newScreenshotURLS);
+  drawScreenshotList(screenshotsParentNode, newScreenshotURLS);
 };
 
-const draw = (parentNode, urls) => {
-  while (parentNode.firstChild) {
-    parentNode.removeChild(parentNode.firstChild);
+const drawScreenshotList = (screenshotsParentNode, urls) => {
+  while (screenshotsParentNode.firstChild) {
+    screenshotsParentNode.removeChild(screenshotsParentNode.firstChild);
   }
 
   urls.forEach((url, index) => {
@@ -74,7 +81,7 @@ const draw = (parentNode, urls) => {
     childNode.style.backgroundImage = `url(${url})`;
 
     node.appendChild(childNode);
-    parentNode.appendChild(node);
+    screenshotsParentNode.appendChild(node);
 
     document
       .querySelector(`.screenshots__list__item__${index}`)
@@ -88,4 +95,15 @@ const draw = (parentNode, urls) => {
       .querySelector(`.screenshots__list__item__${index}`)
       .addEventListener('dragover', e => e.preventDefault());
   });
+};
+
+const drawIcon = (iconParentNode, url) => {
+  while (iconParentNode.firstChild) {
+    iconParentNode.removeChild(iconParentNode.firstChild);
+  }
+
+  const node = document.createElement('div');
+  node.classList.add('icon__item');
+  node.style.backgroundImage = `url("${url}")`;
+  iconParentNode.appendChild(node);
 };

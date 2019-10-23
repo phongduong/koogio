@@ -21,9 +21,9 @@ const storage = diskStorage({
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
 
-  @Post('upload/screenshots')
-  @UseInterceptors(FilesInterceptor('screenshots', 4, { storage }))
-  async uploadFile(@Res() res, @UploadedFiles() files): Promise<any[]> {
+  @Post('upload')
+  @UseInterceptors(FilesInterceptor('files', 4, { storage }))
+  async uploadScreenshots(@Res() res, @UploadedFiles() files): Promise<any[]> {
     return await this.imageService
       .upload(files)
       .then(urls => res.json({ urls }))
