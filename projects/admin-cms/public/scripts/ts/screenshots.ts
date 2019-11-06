@@ -1,15 +1,15 @@
-import { POST } from './_request';
-import { HTMLInputEvent, IScreenshot } from './_interfaces';
+import { POST } from "./request";
+import { HTMLInputEvent, IScreenshot } from "./interfaces";
 
 const screenshotsParentNode: Element = document.querySelector(
-  '#screenshots__list',
+  "#screenshots__list",
 );
-const iconParentNode: Element = document.querySelector('.icon');
+const iconParentNode: Element = document.querySelector(".icon");
 let screenshotURLs: string[] = [];
 
 document
-  .querySelector('#screenshots')
-  .addEventListener('change', async (e: HTMLInputEvent) => {
+  .querySelector("#screenshots")
+  .addEventListener("change", async (e: HTMLInputEvent) => {
     const {
       target: { files },
     } = e;
@@ -17,11 +17,11 @@ document
 
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < files.length; i++) {
-      formData.append('files', files[i]);
+      formData.append("files", files[i]);
     }
 
     try {
-      const response = await POST('/image/upload', formData);
+      const response = await POST("/image/upload", formData);
       const { urls } = await response.json();
       screenshotURLs = urls;
 
@@ -32,19 +32,19 @@ document
   });
 
 document
-  .querySelector('#icon')
-  .addEventListener('change', async (e: HTMLInputEvent) => {
+  .querySelector("#icon")
+  .addEventListener("change", async (e: HTMLInputEvent) => {
     const {
       target: { files },
     } = e;
     const formData = new FormData();
-    formData.append('files', files[0]);
+    formData.append("files", files[0]);
 
     try {
-      const response = await POST('/image/upload', formData);
+      const data = await POST("/image/upload", formData);
       const {
         urls: [url],
-      } = await response.json();
+      } = data;
 
       drawIcon(iconParentNode, url);
     } catch (error) {
@@ -53,11 +53,11 @@ document
   });
 
 const drag = (e: HTMLInputEvent, url: IScreenshot) =>
-  e.dataTransfer.setData('text', JSON.stringify(url));
+  e.dataTransfer.setData("text", JSON.stringify(url));
 
 const drop = (e: HTMLInputEvent, currentURL: IScreenshot) => {
   e.preventDefault();
-  const newURL = JSON.parse(e.dataTransfer.getData('text'));
+  const newURL = JSON.parse(e.dataTransfer.getData("text"));
   const newScreenshotURLS = screenshotURLs.map((url, index) => {
     if (index === newURL.index) {
       return currentURL.url;
@@ -80,35 +80,35 @@ const drawScreenshotList = (screenshotsNode: Element, urls: string[]) => {
   }
 
   urls.forEach((url, index) => {
-    const node = document.createElement('div');
-    const imgNode = document.createElement('img');
+    const node = document.createElement("div");
+    const imgNode = document.createElement("img");
 
     node.classList.add(
-      'col-6',
-      'col-md-3',
-      'screenshots__list__item',
+      "col-6",
+      "col-md-3",
+      "screenshots__list__item",
       `screenshots__list__item__${index}`,
     );
     node.draggable = true;
     imgNode.src = url;
-    imgNode.alt = 'screenshot';
+    imgNode.alt = "screenshot";
 
     node.appendChild(imgNode);
     screenshotsNode.appendChild(node);
 
     document
       .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener('dragstart', (e: HTMLInputEvent) =>
+      .addEventListener("dragstart", (e: HTMLInputEvent) =>
         drag(e, { index, url }),
       );
 
     document
       .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener('drop', (e: HTMLInputEvent) => drop(e, { index, url }));
+      .addEventListener("drop", (e: HTMLInputEvent) => drop(e, { index, url }));
 
     document
       .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener('dragover', (e: HTMLInputEvent) => e.preventDefault());
+      .addEventListener("dragover", (e: HTMLInputEvent) => e.preventDefault());
   });
 };
 
@@ -117,9 +117,9 @@ const drawIcon = (iconNode: Element, url: string) => {
     iconNode.removeChild(iconNode.firstChild);
   }
 
-  const imgNode = document.createElement('img');
-  imgNode.classList.add('icon__item');
+  const imgNode = document.createElement("img");
+  imgNode.classList.add("icon__item");
   imgNode.src = url;
-  imgNode.alt = 'screenshot';
+  imgNode.alt = "screenshot";
   iconNode.appendChild(imgNode);
 };

@@ -10,10 +10,9 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "lib": ["dom", "dom.iterable", "es5", "es6"],
     "esModuleInterop": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "downlevelIteration": true,
   },
   "exclude": ["node_modules", "dist"]
 }

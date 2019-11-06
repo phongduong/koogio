@@ -43,13 +43,13 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 exports.__esModule = true;
-var _request_1 = require("./_request");
-var screenshotsParentNode = document.querySelector('#screenshots__list');
-var iconParentNode = document.querySelector('.icon');
+var request_1 = require("./request");
+var screenshotsParentNode = document.querySelector("#screenshots__list");
+var iconParentNode = document.querySelector(".icon");
 var screenshotURLs = [];
 document
-    .querySelector('#screenshots')
-    .addEventListener('change', function (e) { return __awaiter(void 0, void 0, void 0, function () {
+    .querySelector("#screenshots")
+    .addEventListener("change", function (e) { return __awaiter(void 0, void 0, void 0, function () {
     var files, formData, i, response, urls, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -58,12 +58,12 @@ document
                 formData = new FormData();
                 // tslint:disable-next-line: prefer-for-of
                 for (i = 0; i < files.length; i++) {
-                    formData.append('files', files[i]);
+                    formData.append("files", files[i]);
                 }
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 4, , 5]);
-                return [4 /*yield*/, _request_1.POST('/image/upload', formData)];
+                return [4 /*yield*/, request_1.POST("/image/upload", formData)];
             case 2:
                 response = _a.sent();
                 return [4 /*yield*/, response.json()];
@@ -81,40 +81,38 @@ document
     });
 }); });
 document
-    .querySelector('#icon')
-    .addEventListener('change', function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var files, formData, response, url, error_2;
+    .querySelector("#icon")
+    .addEventListener("change", function (e) { return __awaiter(void 0, void 0, void 0, function () {
+    var files, formData, data, url, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 files = e.target.files;
                 formData = new FormData();
-                formData.append('files', files[0]);
+                formData.append("files", files[0]);
                 _a.label = 1;
             case 1:
-                _a.trys.push([1, 4, , 5]);
-                return [4 /*yield*/, _request_1.POST('/image/upload', formData)];
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, request_1.POST("/image/upload", formData)];
             case 2:
-                response = _a.sent();
-                return [4 /*yield*/, response.json()];
-            case 3:
-                url = (_a.sent()).urls[0];
+                data = _a.sent();
+                url = data.urls[0];
                 drawIcon(iconParentNode, url);
-                return [3 /*break*/, 5];
-            case 4:
+                return [3 /*break*/, 4];
+            case 3:
                 error_2 = _a.sent();
                 console.error(error_2);
-                return [3 /*break*/, 5];
-            case 5: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); });
 var drag = function (e, url) {
-    return e.dataTransfer.setData('text', JSON.stringify(url));
+    return e.dataTransfer.setData("text", JSON.stringify(url));
 };
 var drop = function (e, currentURL) {
     e.preventDefault();
-    var newURL = JSON.parse(e.dataTransfer.getData('text'));
+    var newURL = JSON.parse(e.dataTransfer.getData("text"));
     var newScreenshotURLS = screenshotURLs.map(function (url, index) {
         if (index === newURL.index) {
             return currentURL.url;
@@ -132,34 +130,34 @@ var drawScreenshotList = function (screenshotsNode, urls) {
         screenshotsNode.removeChild(screenshotsNode.firstChild);
     }
     urls.forEach(function (url, index) {
-        var node = document.createElement('div');
-        var imgNode = document.createElement('img');
-        node.classList.add('col-6', 'col-md-3', 'screenshots__list__item', "screenshots__list__item__" + index);
+        var node = document.createElement("div");
+        var imgNode = document.createElement("img");
+        node.classList.add("col-6", "col-md-3", "screenshots__list__item", "screenshots__list__item__" + index);
         node.draggable = true;
         imgNode.src = url;
-        imgNode.alt = 'screenshot';
+        imgNode.alt = "screenshot";
         node.appendChild(imgNode);
         screenshotsNode.appendChild(node);
         document
             .querySelector(".screenshots__list__item__" + index)
-            .addEventListener('dragstart', function (e) {
+            .addEventListener("dragstart", function (e) {
             return drag(e, { index: index, url: url });
         });
         document
             .querySelector(".screenshots__list__item__" + index)
-            .addEventListener('drop', function (e) { return drop(e, { index: index, url: url }); });
+            .addEventListener("drop", function (e) { return drop(e, { index: index, url: url }); });
         document
             .querySelector(".screenshots__list__item__" + index)
-            .addEventListener('dragover', function (e) { return e.preventDefault(); });
+            .addEventListener("dragover", function (e) { return e.preventDefault(); });
     });
 };
 var drawIcon = function (iconNode, url) {
     while (iconNode.firstChild) {
         iconNode.removeChild(iconNode.firstChild);
     }
-    var imgNode = document.createElement('img');
-    imgNode.classList.add('icon__item');
+    var imgNode = document.createElement("img");
+    imgNode.classList.add("icon__item");
     imgNode.src = url;
-    imgNode.alt = 'screenshot';
+    imgNode.alt = "screenshot";
     iconNode.appendChild(imgNode);
 };
