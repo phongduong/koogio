@@ -1,9 +1,11 @@
-import { POST } from './request';
-import { HTMLInputEvent } from './interfaces';
+import { POST } from './_request';
+import { HTMLInputEvent, IScreenshot } from './_interfaces';
 
-const screenshotsParentNode = document.querySelector('#screenshots__list');
-const iconParentNode = document.querySelector('.icon');
-let screenshotURLs = [];
+const screenshotsParentNode: Element = document.querySelector(
+  '#screenshots__list',
+);
+const iconParentNode: Element = document.querySelector('.icon');
+let screenshotURLs: string[] = [];
 
 document
   .querySelector('#screenshots')
@@ -13,8 +15,9 @@ document
     } = e;
     const formData = new FormData();
 
-    for (const file of files) {
-      formData.append('files', file);
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
     }
 
     try {
@@ -32,12 +35,10 @@ document
   .querySelector('#icon')
   .addEventListener('change', async (e: HTMLInputEvent) => {
     const {
-      target: {
-        files: [icon],
-      },
+      target: { files },
     } = e;
     const formData = new FormData();
-    formData.append('files', icon);
+    formData.append('files', files[0]);
 
     try {
       const response = await POST('/image/upload', formData);
@@ -51,10 +52,10 @@ document
     }
   });
 
-const drag = (e: HTMLInputEvent, url) =>
+const drag = (e: HTMLInputEvent, url: IScreenshot) =>
   e.dataTransfer.setData('text', JSON.stringify(url));
 
-const drop = (e: HTMLInputEvent, currentURL) => {
+const drop = (e: HTMLInputEvent, currentURL: IScreenshot) => {
   e.preventDefault();
   const newURL = JSON.parse(e.dataTransfer.getData('text'));
   const newScreenshotURLS = screenshotURLs.map((url, index) => {
@@ -73,14 +74,14 @@ const drop = (e: HTMLInputEvent, currentURL) => {
   drawScreenshotList(screenshotsParentNode, newScreenshotURLS);
 };
 
-const drawScreenshotList = (screenshotsNode, urls) => {
+const drawScreenshotList = (screenshotsNode: Element, urls: string[]) => {
   while (screenshotsNode.firstChild) {
     screenshotsNode.removeChild(screenshotsNode.firstChild);
   }
 
   urls.forEach((url, index) => {
     const node = document.createElement('div');
-    const childNode = document.createElement('div');
+    const imgNode = document.createElement('img');
 
     node.classList.add(
       'col-6',
@@ -89,10 +90,10 @@ const drawScreenshotList = (screenshotsNode, urls) => {
       `screenshots__list__item__${index}`,
     );
     node.draggable = true;
+    imgNode.src = url;
+    imgNode.alt = 'screenshot';
 
-    childNode.style.backgroundImage = `url(${url})`;
-
-    node.appendChild(childNode);
+    node.appendChild(imgNode);
     screenshotsNode.appendChild(node);
 
     document
@@ -111,13 +112,14 @@ const drawScreenshotList = (screenshotsNode, urls) => {
   });
 };
 
-const drawIcon = (iconNode, url) => {
+const drawIcon = (iconNode: Element, url: string) => {
   while (iconNode.firstChild) {
     iconNode.removeChild(iconNode.firstChild);
   }
 
-  const node = document.createElement('div');
-  node.classList.add('icon__item');
-  node.style.backgroundImage = `url("${url}")`;
-  iconNode.appendChild(node);
+  const imgNode = document.createElement('img');
+  imgNode.classList.add('icon__item');
+  imgNode.src = url;
+  imgNode.alt = 'screenshot';
+  iconNode.appendChild(imgNode);
 };
