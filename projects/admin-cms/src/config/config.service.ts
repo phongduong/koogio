@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import * as dotenv from 'dotenv';
+import { Injectable } from "@nestjs/common";
+import * as dotenv from "dotenv";
 dotenv.config();
 
 @Injectable()

@@ -1,0 +1,10 @@
+.new-form .screenshots__list__item {
+  cursor: pointer;
+  height: 250px; }
+  .new-form .screenshots__list__item img {
+    width: 100%;
+    height: 100%; }
+
+.new-form .icon__item {
+  width: 64px;
+  height: 64px; }

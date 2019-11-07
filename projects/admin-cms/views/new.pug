@@ -2,7 +2,7 @@ extends utils/layout.pug
 
 block content
   h1(class="text-center") New project
-  form(method="post")
+  form(method="post" class="new-form")
     .form-group
       label(for="title") Title
       input#title(type="text"  name="title" class="form-control" placeholder="Title" required)
@@ -23,6 +23,3 @@ block content
     .screenshots
       .row(class="mb-2 p-2 screenshots__list" id="screenshots__list") 
     button(type="submit" class="btn btn-primary") Create
-
-append scripts
-  script(src="scripts/screenshots.js")
