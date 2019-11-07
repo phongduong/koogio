@@ -14,9 +14,11 @@ const jsDev = () =>
   browserify({
     basedir: ".",
     entries: glob.sync("public/scripts/ts/**/*.ts"),
+    debug: true
   })
     .plugin(tsify)
     .bundle()
+    .on("error", error => console.log(error))
     .pipe(source("bundle.js"))
     .pipe(dest("public/scripts/js"));
 

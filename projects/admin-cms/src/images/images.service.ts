@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { FirebaseService } from "../firebase/firebase.service";
 
 @Injectable()
-export class ImageService {
+export class ImagesService {
   private readonly bucket;
 
   constructor(private readonly firebaseService: FirebaseService) {
