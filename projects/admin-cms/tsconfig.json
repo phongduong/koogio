@@ -9,10 +9,9 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
-    "downlevelIteration": true,
+    "downlevelIteration": true
   },
   "exclude": ["node_modules", "dist"]
 }

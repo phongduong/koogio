@@ -22,7 +22,7 @@ document
 
     try {
       const response = await POST("/image/upload", formData);
-      const { urls } = await response.json();
+      const { urls } = await response;
       screenshotURLs = urls;
 
       drawScreenshotList(screenshotsParentNode, screenshotURLs);

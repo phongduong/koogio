@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { FirebaseService } from '../firebase/firebase.service';
+import { Injectable } from "@nestjs/common";
+import { FirebaseService } from "../firebase/firebase.service";
 
 @Injectable()
 export class ImageService {
@@ -9,7 +9,7 @@ export class ImageService {
     this.bucket = firebaseService.getBucket();
   }
 
-  async upload(images): Promise<any[]> {
+  async upload(images): Promise<string[]> {
     const paths = images.map(image => image.path);
     const uploadOptions = { gzip: true, public: true };
 
