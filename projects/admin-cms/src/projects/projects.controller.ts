@@ -6,22 +6,25 @@ import {
   Body,
   Param,
   Put,
-  Delete
+  Delete,
+  Res,
+  HttpStatus
 } from "@nestjs/common";
+import { ProjectsService } from "./projects.service";
 
 @Controller("projects")
 export class ProjectsController {
-  @Post()
-  async createProject(@Body() body): Promise<any> {
-    console.log(body);
+  constructor(private readonly projectsService: ProjectsService) {}
 
-    return Promise;
-  }
-
-  @Get("/new")
+  @Get()
   @Render("new")
   getProjects() {
     return { title: "New project" };
+  }
+
+  @Post()
+  async createProject(@Body() body, @Res() res): Promise<any> {
+    return res.status(HttpStatus.CREATED).send();
   }
 
   @Get("/:id")

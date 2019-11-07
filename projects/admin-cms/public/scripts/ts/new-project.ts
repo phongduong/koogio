@@ -1,4 +1,4 @@
-import { POST } from "./request";
+import { POST, UPLOAD } from "./request";
 import { HTMLInputEvent, IScreenshot } from "./interfaces";
 import { getFieldValue } from "./helpers";
 
@@ -23,7 +23,7 @@ document
     }
 
     try {
-      const response = await POST("/images/upload", formData);
+      const response = await UPLOAD(formData);
       const { urls } = await response;
       screenshotURLs = urls;
 
@@ -43,7 +43,7 @@ document
     formData.append("files", files[0]);
 
     try {
-      const data = await POST("/images/upload", formData);
+      const data = await UPLOAD(formData);
       const {
         urls: [url]
       } = data;

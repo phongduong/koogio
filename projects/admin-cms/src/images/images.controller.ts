@@ -4,8 +4,7 @@ import {
   UploadedFiles,
   UseInterceptors,
   Res,
-  HttpStatus,
-  Body
+  HttpStatus
 } from "@nestjs/common";
 import { FilesInterceptor } from "@nestjs/platform-express";
 import { ImagesService } from "./images.service";
@@ -20,19 +19,14 @@ const storage = diskStorage({
 
 @Controller("images")
 export class ImagesController {
-  constructor(private readonly imageService: ImagesService) {}
+  constructor(private readonly imagesService: ImagesService) {}
 
   @Post("upload")
   @UseInterceptors(FilesInterceptor("files", 4, { storage }))
-  async uploadImages(
-    @Res() res,
-    @UploadedFiles() files,
-    @Body() body
-  ): Promise<string[]> {
-    console.log(body)
-    return await this.imageService
+  async uploadImages(@Res() res, @UploadedFiles() files): Promise<string[]> {
+    return await this.imagesService
       .upload(files)
-      .then(urls => res.json({ urls }))
+      .then(urls => res.status(HttpStatus.CREATED).json({ urls }))
       .catch(error =>
         res
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
