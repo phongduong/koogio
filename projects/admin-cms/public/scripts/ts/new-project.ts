@@ -58,19 +58,17 @@ document
 document.querySelector(".new-form").addEventListener("submit", async e => {
   e.preventDefault();
 
-  const data: FormData = new FormData();
-  data.append("title", getFieldValue("title"));
-  data.append("description", getFieldValue("description"));
-  data.append("google-link", getFieldValue("google-link"));
-  data.append("icon", iconURL);
-  // tslint:disable-next-line: prefer-for-of
-  for (let i = 0; i < screenshotURLs.length; i++) {
-    data.append("screenshots", screenshotURLs[i]);
-  }
-
   try {
-    const response = await POST("/projects", data);
-    console.log(response);
+    const data: string = JSON.stringify({
+      title: getFieldValue("title"),
+      description: getFieldValue("description"),
+      googleLink: getFieldValue("google-link"),
+      icon: iconURL,
+      screenshots: screenshotURLs
+    });
+    await POST("/projects", data);
+
+    location.href = "/";
   } catch (error) {
     console.log(error);
   }

@@ -11,6 +11,7 @@ import {
   HttpStatus
 } from "@nestjs/common";
 import { ProjectsService } from "./projects.service";
+import { IProject } from "./project.class";
 
 @Controller("projects")
 export class ProjectsController {
@@ -24,7 +25,17 @@ export class ProjectsController {
 
   @Post()
   async createProject(@Body() body, @Res() res): Promise<any> {
-    return res.status(HttpStatus.CREATED).send();
+    const data: IProject = body;
+
+    try {
+      await this.projectsService.create(data);
+
+      return res.status(HttpStatus.CREATED).json({ data });
+    } catch (error) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
+    }
   }
 
   @Get("/:id")
