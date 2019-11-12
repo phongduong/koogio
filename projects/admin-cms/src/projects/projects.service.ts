@@ -19,10 +19,30 @@ export class ProjectsService {
       .set(project);
   }
 
-  async get(id: string): Promise<any> {}
+  async get(id: string): Promise<any> {
+    return await this.firestore
+      .collection("projects")
+      .doc(id)
+      .get()
+      .then(snapshot => snapshot.data());
+  }
 
   async getAll(): Promise<any[]> {
-    return [];
+    return await this.firestore
+      .collection("projects")
+      .listDocuments()
+      .then(projectRefs => this.firestore.getAll(...projectRefs))
+      .then(projectSnapshots =>
+        projectSnapshots
+          .map(snapshot => {
+            return {
+              ...snapshot.data(),
+              id: snapshot.id,
+              createTime: snapshot.createTime.seconds
+            };
+          })
+          .sort((projectA, projectB) => projectB - projectA)
+      );
   }
 
   async update(id: string, project: IProject): Promise<any> {}

@@ -17,12 +17,6 @@ import { IProject } from "./project.class";
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
-  @Get()
-  @Render("new")
-  getProjects() {
-    return { title: "New project" };
-  }
-
   @Post()
   async createProject(@Body() body, @Res() res): Promise<any> {
     const data: IProject = body;
@@ -39,7 +33,16 @@ export class ProjectsController {
   }
 
   @Get("/:id")
-  async getProjectById(@Param("id") id): Promise<any> {}
+  @Render("project")
+  async getProjectById(@Param("id") id): Promise<any> {
+    try {
+      const data = await this.projectsService.get(id);
+
+      return { title: data.title, data: { ...data, id } };
+    } catch (error) {
+      return { title: error.message };
+    }
+  }
 
   @Put("/:id")
   async updateProject(@Param("id") id): Promise<any> {}
