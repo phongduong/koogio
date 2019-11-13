@@ -32,7 +32,7 @@ export class ProjectsController {
     }
   }
 
-  @Get("/:id")
+  @Get(":id")
   @Render("project")
   async getProjectById(@Param("id") id): Promise<any> {
     try {
@@ -44,9 +44,9 @@ export class ProjectsController {
     }
   }
 
-  @Put("/:id")
+  @Put(":id")
   async updateProject(@Param("id") id): Promise<any> {}
 
-  @Delete("/:id")
+  @Delete(":id")
   async deleteProject(@Param("id") id): Promise<any> {}
 }
