@@ -1,3 +1,55 @@
 extends utils/layout.pug
 
 block content
+  form(method="post" class="edit-form")
+    .form-group
+      label(for="title") Title
+      input#title(
+        value=data.title
+        type="text"  
+        name="title" 
+        class="form-control" 
+        placeholder="Title" 
+        required)
+    .form-group
+      label(for="description") Description
+      textarea#description(
+        name="description" 
+        class="form-control" 
+        placeholder="Description" 
+        rows="3" 
+        required)= data.description
+    .form-group
+      label(for="google-link") Google Play link
+      input#google-link(
+        value=data.googleLink
+        type="url" 
+        name="google-link"
+        class="form-control" 
+        placeholder="Link" 
+        required)
+    .form-group
+      label(for="icon") Icon
+      input#icon(
+        type="file" 
+        name="icon" 
+        class="form-control" 
+        required)
+    .icon
+      .icon__item
+        img(
+          src=data.icon
+          alt="screenshot")
+    .form-group
+      label(for="screenshots") Screenshots
+        span(class="required")
+      input#screenshots(
+        type="file" 
+        name="screenshots" 
+        class="form-control" 
+        required multiple)
+    .screenshots
+      .row(
+        class="mb-2 p-2 screenshots__list" 
+        id="screenshots__list") 
+    button(type="submit" class="btn btn-primary") Create
