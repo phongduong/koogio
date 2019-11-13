@@ -2,3 +2,14 @@ extends utils/layout.pug
 
 block content
   h1(class="text-center") Projects
+  div(class="row justify-content-center py-4")
+    each project in data
+      .col-auto
+        .card
+          img.card-img-top(src=project.icon)
+          .card-body
+            h5.card-title= project.title
+            p.card-text= project.description
+            a(class="btn btn-primary" href=`projects/${project.id}`) Edit
+
+  

@@ -11,11 +11,15 @@ export class FirebaseService {
 
     admin.initializeApp({
       credential: admin.credential.cert(this.serviceAccount),
-      storageBucket: "gs://koogio.appspot.com/",
+      storageBucket: "gs://koogio.appspot.com/"
     });
   }
 
   getBucket() {
     return admin.storage().bucket();
+  }
+
+  getFirestore() {
+    return admin.firestore();
   }
 }

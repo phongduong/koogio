@@ -1,17 +1,19 @@
-import { POST } from "./request";
+import { POST, UPLOAD } from "./request";
 import { HTMLInputEvent, IScreenshot } from "./interfaces";
+import { getFieldValue } from "./helpers";
 
 const screenshotsParentNode: Element = document.querySelector(
-  "#screenshots__list",
+  "#screenshots__list"
 );
 const iconParentNode: Element = document.querySelector(".icon");
+let iconURL: string = "";
 let screenshotURLs: string[] = [];
 
 document
   .querySelector("#screenshots")
   .addEventListener("change", async (e: HTMLInputEvent) => {
     const {
-      target: { files },
+      target: { files }
     } = e;
     const formData = new FormData();
 
@@ -21,7 +23,7 @@ document
     }
 
     try {
-      const response = await POST("/image/upload", formData);
+      const response = await UPLOAD(formData);
       const { urls } = await response;
       screenshotURLs = urls;
 
@@ -35,22 +37,42 @@ document
   .querySelector("#icon")
   .addEventListener("change", async (e: HTMLInputEvent) => {
     const {
-      target: { files },
+      target: { files }
     } = e;
     const formData = new FormData();
     formData.append("files", files[0]);
 
     try {
-      const data = await POST("/image/upload", formData);
+      const data = await UPLOAD(formData);
       const {
-        urls: [url],
+        urls: [url]
       } = data;
 
+      iconURL = url;
       drawIcon(iconParentNode, url);
     } catch (error) {
       console.error(error);
     }
   });
+
+document.querySelector(".new-form").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  try {
+    const data: string = JSON.stringify({
+      title: getFieldValue("title"),
+      description: getFieldValue("description"),
+      googleLink: getFieldValue("google-link"),
+      icon: iconURL,
+      screenshots: screenshotURLs
+    });
+    await POST("/projects", data);
+
+    location.href = "/";
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 const drag = (e: HTMLInputEvent, url: IScreenshot) =>
   e.dataTransfer.setData("text", JSON.stringify(url));
@@ -87,7 +109,7 @@ const drawScreenshotList = (screenshotsNode: Element, urls: string[]) => {
       "col-6",
       "col-md-3",
       "screenshots__list__item",
-      `screenshots__list__item__${index}`,
+      `screenshots__list__item__${index}`
     );
     node.draggable = true;
     imgNode.src = url;
@@ -99,7 +121,7 @@ const drawScreenshotList = (screenshotsNode: Element, urls: string[]) => {
     document
       .querySelector(`.screenshots__list__item__${index}`)
       .addEventListener("dragstart", (e: HTMLInputEvent) =>
-        drag(e, { index, url }),
+        drag(e, { index, url })
       );
 
     document
