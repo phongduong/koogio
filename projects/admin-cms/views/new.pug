@@ -1,5 +1,9 @@
 extends utils/layout.pug
 
+append style
+  style(src="style/css/style.css")
+
+
 block content
   h1(class="text-center") New project
   form(method="post" class="new-form")
@@ -23,3 +27,6 @@ block content
     .screenshots
       .row(class="mb-2 p-2 screenshots__list" id="screenshots__list") 
     button(type="submit" class="btn btn-primary") Create
+
+append scripts
+  script(src="scripts/js/bundle.js")

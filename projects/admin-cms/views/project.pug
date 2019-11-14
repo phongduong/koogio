@@ -1,5 +1,8 @@
 extends utils/layout.pug
 
+append style
+  style(src="../style/css/style.css")
+
 block content
   form(method="post" class="edit-form")
     .form-group
@@ -53,3 +56,6 @@ block content
         class="mb-2 p-2 screenshots__list" 
         id="screenshots__list") 
     button(type="submit" class="btn btn-primary") Create
+
+append scripts
+  script(src="../scripts/js/bundle.js")

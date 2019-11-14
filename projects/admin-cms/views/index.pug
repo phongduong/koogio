@@ -1,5 +1,8 @@
 extends utils/layout.pug
 
+append style
+  style(src="style/css/style.css")
+
 block content
   h1(class="text-center") Projects
   div(class="row justify-content-center py-4")
@@ -12,4 +15,5 @@ block content
             p.card-text= project.description
             a(class="btn btn-primary" href=`projects/${project.id}`) Edit
 
-  
+append scripts
+  script(src="scripts/js/bundle.js")
