@@ -45,7 +45,9 @@ export class ProjectsService {
       );
   }
 
-  async update(id: string, project: IProject): Promise<any> {}
+  async update(id: string, project: IProject): Promise<any> {
+    console.log(id, project);
+  }
 
   async delete(id: string): Promise<any> {}
 }

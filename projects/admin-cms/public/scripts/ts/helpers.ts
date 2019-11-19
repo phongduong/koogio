@@ -82,6 +82,6 @@ export const drawIcon = (iconNode: Element, url: string) => {
   const imgNode = document.createElement("img");
   imgNode.classList.add("icon__item");
   imgNode.src = url;
-  imgNode.alt = "screenshot";
+  imgNode.alt = "icon";
   iconNode.appendChild(imgNode);
 };

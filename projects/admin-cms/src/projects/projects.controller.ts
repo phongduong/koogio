@@ -18,13 +18,11 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
-  async createProject(@Body() body, @Res() res): Promise<any> {
-    const data: IProject = body;
-
+  async createProject(@Body() body: IProject, @Res() res): Promise<any> {
     try {
-      await this.projectsService.create(data);
+      await this.projectsService.create(body);
 
-      return res.status(HttpStatus.CREATED).json({ data });
+      return res.status(HttpStatus.CREATED).json({ data: body });
     } catch (error) {
       return res
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -45,7 +43,21 @@ export class ProjectsController {
   }
 
   @Put(":id")
-  async updateProject(@Param("id") id): Promise<any> {}
+  async updateProject(
+    @Param("id") id,
+    @Body() body: IProject,
+    @Res() res
+  ): Promise<any> {
+    try {
+      await this.projectsService.update(id, body);
+
+      return res.status(HttpStatus.OK).json({ data: body });
+    } catch (error) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
+    }
+  }
 
   @Delete(":id")
   async deleteProject(@Param("id") id): Promise<any> {}
