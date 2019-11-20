@@ -11,7 +11,7 @@ import {
   HttpStatus
 } from "@nestjs/common";
 import { ProjectsService } from "./projects.service";
-import { IProject } from "./project.class";
+import { IProject } from "./project.interface";
 
 @Controller("projects")
 export class ProjectsController {

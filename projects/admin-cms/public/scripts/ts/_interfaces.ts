@@ -12,3 +12,7 @@ export interface IScreenshot {
 export interface IImgElement extends Element {
   src: string;
 }
+
+export interface IButtonElement extends Element {
+  disabled: boolean;
+}

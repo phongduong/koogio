@@ -1,4 +1,4 @@
-import { HTMLInputEvent, IScreenshot } from "./interfaces";
+import { HTMLInputEvent, IScreenshot } from "./_interfaces";
 
 export const getFieldValue = (id: string) =>
   ((document.getElementById(id) as unknown) as HTMLInputEvent).value;
@@ -56,21 +56,17 @@ export const drawScreenshotList = (
     node.appendChild(imgNode);
     screenshotsNode.appendChild(node);
 
-    document
-      .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener("dragstart", (e: HTMLInputEvent) =>
-        drag(e, { index, url })
-      );
+    node.addEventListener("dragstart", (e: HTMLInputEvent) =>
+      drag(e, { index, url })
+    );
 
-    document
-      .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener("drop", (e: HTMLInputEvent) =>
-        drop(e, { index, url }, screenshotsNode, urls)
-      );
+    node.addEventListener("drop", (e: HTMLInputEvent) =>
+      drop(e, { index, url }, screenshotsNode, urls)
+    );
 
-    document
-      .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener("dragover", (e: HTMLInputEvent) => e.preventDefault());
+    node.addEventListener("dragover", (e: HTMLInputEvent) =>
+      e.preventDefault()
+    );
   });
 };
 

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { FirebaseService } from "../firebase/firebase.service";
-import { IProject, Project } from "./project.class";
+import { IProject } from "./project.interface";
 
 @Injectable()
 export class ProjectsService {
@@ -11,12 +11,7 @@ export class ProjectsService {
   }
 
   async create(project: IProject): Promise<any> {
-    const newProject = new Project(project);
-
-    return await this.firestore
-      .collection("projects")
-      .doc(newProject.formatId())
-      .set(project);
+    return await this.firestore.collection("projects").add(project);
   }
 
   async get(id: string): Promise<any> {
@@ -46,7 +41,10 @@ export class ProjectsService {
   }
 
   async update(id: string, project: IProject): Promise<any> {
-    console.log(id, project);
+    return await this.firestore
+      .collection("projects")
+      .doc(id)
+      .set(project, { merge: true });
   }
 
   async delete(id: string): Promise<any> {}

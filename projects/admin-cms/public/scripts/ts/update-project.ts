@@ -1,7 +1,18 @@
-import { getFieldValue } from "./helpers";
-import { PUT } from "./request";
-import { IImgElement, HTMLInputEvent } from "./interfaces";
+import { PUT, UPLOAD } from "./_request";
+import { IImgElement, HTMLInputEvent, IButtonElement } from "./_interfaces";
+import {
+  getFieldValue,
+  drawIcon,
+  drawScreenshotList,
+  drag,
+  drop
+} from "./_helpers";
 
+const screenshotsParentNode: Element = document.querySelector(
+  "#screenshots__list"
+);
+const iconParentNode: Element = document.querySelector(".icon");
+const saveButton: IButtonElement = document.querySelector(".save-button");
 let screenshotURLs: string[] = [];
 let iconURL: string = "";
 
@@ -10,26 +21,95 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .querySelectorAll("#screenshots__list img")
     .forEach((screenshot: IImgElement) => screenshotURLs.push(screenshot.src));
-  console.log(iconURL, screenshotURLs);
+  screenshotURLs.forEach((url, index) => {
+    const node = document.querySelector(`.screenshots__list__item__${index}`);
+
+    node.addEventListener("dragstart", (e: HTMLInputEvent) =>
+      drag(e, { index, url })
+    );
+
+    node.addEventListener("drop", (e: HTMLInputEvent) =>
+      drop(e, { index, url }, screenshotsParentNode, screenshotURLs)
+    );
+
+    node.addEventListener("dragover", (e: HTMLInputEvent) =>
+      e.preventDefault()
+    );
+  });
 });
 
 document
   .querySelector(".edit-form")
   .addEventListener("submit", async (e: HTMLInputEvent) => {
     e.preventDefault();
-    console.log(e);
-    // try {
-    //   const data: string = JSON.stringify({
-    //     title: getFieldValue("title"),
-    //     description: getFieldValue("description"),
-    //     googleLink: getFieldValue("google-link"),
-    //     icon: iconURL,
-    //     screenshots: screenshotURLs
-    //   });
-    //   await POST("/projects", data);
+    const {
+      target: {
+        dataset: { id }
+      }
+    } = e;
+    saveButton.disabled = true;
 
-    //   location.href = "/";
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const data: string = JSON.stringify({
+        title: getFieldValue("title"),
+        description: getFieldValue("description"),
+        googleLink: getFieldValue("google-link"),
+        icon: iconURL,
+        screenshots: screenshotURLs
+      });
+
+      await PUT(`/projects/${id}`, data);
+      saveButton.disabled = false;
+
+      location.href = "/";
+    } catch (error) {
+      saveButton.disabled = false;
+      console.log(error);
+    }
+  });
+
+document
+  .querySelector("#screenshots")
+  .addEventListener("change", async (e: HTMLInputEvent) => {
+    const {
+      target: { files }
+    } = e;
+    const formData = new FormData();
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+
+    try {
+      const response = await UPLOAD(formData);
+      const { urls } = await response;
+      screenshotURLs = urls;
+
+      drawScreenshotList(screenshotsParentNode, screenshotURLs);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+document
+  .querySelector("#icon")
+  .addEventListener("change", async (e: HTMLInputEvent) => {
+    const {
+      target: { files }
+    } = e;
+    const formData = new FormData();
+    formData.append("files", files[0]);
+
+    try {
+      const data = await UPLOAD(formData);
+      const {
+        urls: [url]
+      } = data;
+
+      iconURL = url;
+      drawIcon(iconParentNode, url);
+    } catch (error) {
+      console.error(error);
+    }
   });

@@ -1,10 +1,10 @@
-import { POST, UPLOAD } from "./request";
-import { HTMLInputEvent } from "./interfaces";
+import { POST, UPLOAD } from "./_request";
+import { HTMLInputEvent } from "./_interfaces";
 import {
   getFieldValue,
   drawIcon,
   drawScreenshotList,
-} from "./helpers";
+} from "./_helpers";
 
 const screenshotsParentNode: Element = document.querySelector(
   "#screenshots__list"
