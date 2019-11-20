@@ -1,3 +1,65 @@
 extends utils/layout.pug
 
+append style
+  link(rel="stylesheet", href="../style/css/style.css")
+
 block content
+  form(method="post" class="edit-form" data-id=data.id)
+    .form-group
+      label(for="title") Title
+      input#title(
+        value=data.title
+        type="text"  
+        name="title" 
+        class="form-control" 
+        placeholder="Title" 
+        required)
+    .form-group
+      label(for="description") Description
+      textarea#description(
+        name="description" 
+        class="form-control" 
+        placeholder="Description" 
+        rows="3" 
+        required)= data.description
+    .form-group
+      label(for="google-link") Google Play link
+      input#google-link(
+        value=data.googleLink
+        type="url" 
+        name="google-link"
+        class="form-control" 
+        placeholder="Link" 
+        required)
+    .form-group
+      label(for="icon") Icon
+      input#icon(
+        type="file" 
+        name="icon" 
+        class="form-control")
+    .icon
+      img.icon__item(
+        src=data.icon
+        alt="icon")
+    .form-group
+      label(for="screenshots") Screenshots
+        span(class="required")
+      input#screenshots(
+        type="file" 
+        name="screenshots" 
+        class="form-control" 
+        multiple)
+    .screenshots
+      .row(
+        class="mb-2 p-2 screenshots__list" 
+        id="screenshots__list") 
+          - for (let i = 0; i < data.screenshots.length; i++)
+            - var classes = ["col-6", "col-md-3", "screenshots__list__item", "screenshots__list__item__" + i]
+            div(class=classes
+              drag=true)
+              img(src=data.screenshots[i]
+                alt="screenshot")
+    button(type="botton" class="btn btn-primary") Save
+
+append scripts
+  script(src="../scripts/js/bundle.js")

@@ -19,7 +19,7 @@ export class AppController {
     }
   }
 
-  @Get("/new")
+  @Get("new")
   @Render("new")
   newProject() {
     return { title: "New project" };

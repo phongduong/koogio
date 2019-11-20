@@ -1,9 +1,8 @@
 const { src, dest, series, parallel, watch } = require("gulp");
 const sass = require("gulp-sass");
-const browserify = require("browserify");
-const source = require("vinyl-source-stream");
-const tsify = require("tsify");
-const glob = require("glob");
+const rollup = require("gulp-better-rollup");
+const rollupTypescriptPlugin = require("rollup-plugin-typescript");
+const rename = require("gulp-rename");
 
 const cssDev = () =>
   src("public/style/scss/**/*.scss")
@@ -11,15 +10,13 @@ const cssDev = () =>
     .pipe(dest("public/style/css"));
 
 const jsDev = () =>
-  browserify({
-    basedir: ".",
-    entries: glob.sync("public/scripts/ts/**/*.ts"),
-    debug: true
-  })
-    .plugin(tsify)
-    .bundle()
-    .on("error", error => console.log(error))
-    .pipe(source("bundle.js"))
+  src(["public/scripts/ts/*.ts", "!public/scripts/ts/_*.ts"])
+    .pipe(rollup({ plugins: [rollupTypescriptPlugin()] }, { format: "umd" }))
+    .pipe(
+      rename({
+        extname: ".js"
+      })
+    )
     .pipe(dest("public/scripts/js"));
 
 const cssWatch = () => watch("public/style/scss/**/*.scss", cssDev);

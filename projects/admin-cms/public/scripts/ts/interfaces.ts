@@ -8,3 +8,7 @@ export interface IScreenshot {
   index: number;
   url: string;
 }
+
+export interface IImgElement extends Element {
+  src: string;
+}
