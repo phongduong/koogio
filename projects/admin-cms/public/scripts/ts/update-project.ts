@@ -1,5 +1,10 @@
 import { PUT, UPLOAD } from "./_request";
-import { IImgElement, HTMLInputEvent, IButtonElement } from "./_interfaces";
+import {
+  IImgElement,
+  HTMLInputEvent,
+  IButtonElement,
+  Data
+} from "./_interfaces";
 import {
   getFieldValue,
   drawIcon,
@@ -13,15 +18,18 @@ const screenshotsParentNode: Element = document.querySelector(
 );
 const iconParentNode: Element = document.querySelector(".icon");
 const saveButton: IButtonElement = document.querySelector(".save-button");
-let screenshotURLs: string[] = [];
-let iconURL: string = "";
+const screenshotURLs: string[] = [];
+const updateData = new Data();
 
 document.addEventListener("DOMContentLoaded", () => {
-  iconURL = (document.querySelector(".icon img") as IImgElement).src;
+  updateData.setIconURL(
+    (document.querySelector(".icon img") as IImgElement).src
+  );
   document
     .querySelectorAll("#screenshots__list img")
     .forEach((screenshot: IImgElement) => screenshotURLs.push(screenshot.src));
-  screenshotURLs.forEach((url, index) => {
+  updateData.setScreenshotURLs(screenshotURLs);
+  updateData.getScreenshotURLs().forEach((url, index) => {
     const node = document.querySelector(`.screenshots__list__item__${index}`);
 
     node.addEventListener("dragstart", (e: HTMLInputEvent) =>
@@ -29,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     node.addEventListener("drop", (e: HTMLInputEvent) =>
-      drop(e, { index, url }, screenshotsParentNode, screenshotURLs)
+      drop(e, { index, url }, screenshotsParentNode, updateData)
     );
 
     node.addEventListener("dragover", (e: HTMLInputEvent) =>
@@ -54,8 +62,8 @@ document
         title: getFieldValue("title"),
         description: getFieldValue("description"),
         googleLink: getFieldValue("google-link"),
-        icon: iconURL,
-        screenshots: screenshotURLs
+        icon: updateData.getIconURL(),
+        screenshots: updateData.getScreenshotURLs()
       });
 
       await PUT(`/projects/${id}`, data);
@@ -84,9 +92,9 @@ document
     try {
       const response = await UPLOAD(formData);
       const { urls } = await response;
-      screenshotURLs = urls;
+      updateData.setScreenshotURLs(urls);
 
-      drawScreenshotList(screenshotsParentNode, screenshotURLs);
+      drawScreenshotList(screenshotsParentNode, updateData);
     } catch (error) {
       console.error(error);
     }
@@ -107,7 +115,7 @@ document
         urls: [url]
       } = data;
 
-      iconURL = url;
+      updateData.setIconURL(url);
       drawIcon(iconParentNode, url);
     } catch (error) {
       console.error(error);

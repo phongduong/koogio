@@ -16,3 +16,29 @@ export interface IImgElement extends Element {
 export interface IButtonElement extends Element {
   disabled: boolean;
 }
+
+export class Data {
+  private screenshotURLs: string[];
+  private iconURL: string;
+
+  constructor() {
+    this.screenshotURLs = [];
+    this.iconURL = "";
+  }
+
+  setScreenshotURLs(screenshotURLs: string[]): void {
+    this.screenshotURLs = screenshotURLs;
+  }
+
+  getScreenshotURLs(): string[] {
+    return this.screenshotURLs;
+  }
+
+  setIconURL(iconURL: string): void {
+    this.iconURL = iconURL;
+  }
+
+  getIconURL(): string {
+    return this.iconURL;
+  }
+}

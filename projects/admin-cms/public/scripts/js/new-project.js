@@ -16,12 +16,32 @@
   }).then(res => res.json());
   //# sourceMappingURL=_request.js.map
 
+  class Data {
+      constructor() {
+          this.screenshotURLs = [];
+          this.iconURL = "";
+      }
+      setScreenshotURLs(screenshotURLs) {
+          this.screenshotURLs = screenshotURLs;
+      }
+      getScreenshotURLs() {
+          return this.screenshotURLs;
+      }
+      setIconURL(iconURL) {
+          this.iconURL = iconURL;
+      }
+      getIconURL() {
+          return this.iconURL;
+      }
+  }
+  //# sourceMappingURL=_interfaces.js.map
+
   const getFieldValue = (id) => document.getElementById(id).value;
   const drag = (e, url) => e.dataTransfer.setData("text", JSON.stringify(url));
-  const drop = (e, currentURL, screenshotsNode, screenshotURLs) => {
+  const drop = (e, currentURL, screenshotsNode, data) => {
       e.preventDefault();
       const newURL = JSON.parse(e.dataTransfer.getData("text"));
-      const newScreenshotURLS = screenshotURLs.map((url, index) => {
+      const newScreenshotURLS = data.getScreenshotURLs().map((url, index) => {
           if (index === newURL.index) {
               return currentURL.url;
           }
@@ -30,14 +50,14 @@
           }
           return url;
       });
-      drawScreenshotList(screenshotsNode, newScreenshotURLS);
-      return newScreenshotURLS;
+      data.setScreenshotURLs(newScreenshotURLS);
+      drawScreenshotList(screenshotsNode, data);
   };
-  const drawScreenshotList = (screenshotsNode, urls) => {
+  const drawScreenshotList = (screenshotsNode, data) => {
       while (screenshotsNode.firstChild) {
           screenshotsNode.removeChild(screenshotsNode.firstChild);
       }
-      urls.forEach((url, index) => {
+      data.getScreenshotURLs().forEach((url, index) => {
           const node = document.createElement("div");
           const imgNode = document.createElement("img");
           node.classList.add("col-6", "col-md-3", "screenshots__list__item", `screenshots__list__item__${index}`);
@@ -47,7 +67,7 @@
           node.appendChild(imgNode);
           screenshotsNode.appendChild(node);
           node.addEventListener("dragstart", (e) => drag(e, { index, url }));
-          node.addEventListener("drop", (e) => drop(e, { index, url }, screenshotsNode, urls));
+          node.addEventListener("drop", (e) => drop(e, { index, url }, screenshotsNode, data));
           node.addEventListener("dragover", (e) => e.preventDefault());
       });
   };
@@ -61,11 +81,11 @@
       imgNode.alt = "icon";
       iconNode.appendChild(imgNode);
   };
+  //# sourceMappingURL=_helpers.js.map
 
   const screenshotsParentNode = document.querySelector("#screenshots__list");
   const iconParentNode = document.querySelector(".icon");
-  let iconURL = "";
-  let screenshotURLs = [];
+  const newData = new Data();
   document
       .querySelector("#screenshots")
       .addEventListener("change", async (e) => {
@@ -77,8 +97,8 @@
       try {
           const response = await UPLOAD(formData);
           const { urls } = await response;
-          screenshotURLs = urls;
-          drawScreenshotList(screenshotsParentNode, screenshotURLs);
+          newData.setScreenshotURLs(urls);
+          drawScreenshotList(screenshotsParentNode, newData);
       }
       catch (error) {
           console.error(error);
@@ -93,7 +113,7 @@
       try {
           const data = await UPLOAD(formData);
           const { urls: [url] } = data;
-          iconURL = url;
+          newData.setIconURL(url);
           drawIcon(iconParentNode, url);
       }
       catch (error) {
@@ -107,8 +127,8 @@
               title: getFieldValue("title"),
               description: getFieldValue("description"),
               googleLink: getFieldValue("google-link"),
-              icon: iconURL,
-              screenshots: screenshotURLs
+              icon: newData.getIconURL(),
+              screenshots: newData.getScreenshotURLs()
           });
           await POST("/projects", data);
           location.href = "/";

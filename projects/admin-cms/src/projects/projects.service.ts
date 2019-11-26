@@ -23,21 +23,23 @@ export class ProjectsService {
   }
 
   async getAll(): Promise<any[]> {
-    return await this.firestore
+    const documents = await this.firestore
       .collection("projects")
-      .listDocuments()
-      .then(projectRefs => this.firestore.getAll(...projectRefs))
-      .then(projectSnapshots =>
-        projectSnapshots
-          .map(snapshot => {
-            return {
-              ...snapshot.data(),
-              id: snapshot.id,
-              createTime: snapshot.createTime.seconds
-            };
-          })
-          .sort((projectA, projectB) => projectB - projectA)
-      );
+      .listDocuments();
+
+    return documents.length !== 0
+      ? this.firestore.getAll(...documents).then(projectSnapshots =>
+          projectSnapshots
+            .map(snapshot => {
+              return {
+                ...snapshot.data(),
+                id: snapshot.id,
+                createTime: snapshot.createTime.seconds
+              };
+            })
+            .sort((projectA, projectB) => projectB - projectA)
+        )
+      : [];
   }
 
   async update(id: string, project: IProject): Promise<any> {
@@ -47,5 +49,10 @@ export class ProjectsService {
       .set(project, { merge: true });
   }
 
-  async delete(id: string): Promise<any> {}
+  async delete(id: string): Promise<any> {
+    return await this.firestore
+      .collection("projects")
+      .doc(id)
+      .delete();
+  }
 }
