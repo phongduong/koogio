@@ -1,0 +1,10 @@
+.home {
+  .card {
+    &-body {
+      p {
+        height: 100px;
+        overflow-y: hidden;
+      }
+    }
+  }
+}

@@ -1,23 +1,24 @@
 extends utils/layout.pug
 
 append style
-  link(rel="stylesheet", href="style/css/style.css")
+  link(rel="stylesheet" href="style/css/style.css")
 
 block content
-  h1(class="text-center") Projects
-  if data.length !== 0
-    div(class="row py-4")
-      each project in data
-        div(class="col-12 col-sm-6 col-md-4 py-2")
-          .card
-            img.card-img-top(src=project.icon)
-            .card-body
-              h5.card-title= project.title
-              p.card-text= project.description
-              span(class="d-flex flex-column")
-                a(class="btn btn-primary mb-1" href=`projects/${project.id}`) Edit
-                button(class="btn btn-danger delete" data-id=project.id) Delete
-  else
-    h3(class="text-center") Empty
+  +content("home")
+    h1(class="text-center") Projects
+    if data.length !== 0
+      div(class="row py-4")
+        each project in data
+          div(class="col-12 col-sm-6 col-md-4 py-2")
+            .card
+              img.card-img-top(src=project.icon)
+              .card-body
+                h5.card-title= project.title
+                p.card-text= project.description
+                span(class="d-flex flex-column")
+                  a(class="btn btn-primary mb-1" href=`projects/${project.id}`) Edit
+                  button(class="btn btn-danger delete" data-id=project.id) Delete
+    else
+      h3(class="text-center") Empty
 append scripts
   script(src="scripts/js/home.js")

@@ -1,32 +1,33 @@
 extends utils/layout.pug
 
 append style
-  link(rel="stylesheet", href="style/css/style.css")
+  link(rel="stylesheet" href="style/css/style.css")
 
 
 block content
-  h1(class="text-center") New project
-  form(method="post" class="new-form")
-    .form-group
-      label(for="title") Title
-      input#title(type="text"  name="title" class="form-control" placeholder="Title" required)
-    .form-group
-      label(for="description") Description
-      textarea#description(name="description" class="form-control" placeholder="Description" rows="3" required)
-    .form-group
-      label(for="google-link") Google Play link
-      input#google-link(type="url" name="google-link" class="form-control" placeholder="Link" required)
-    .form-group
-      label(for="icon") Icon
-      input#icon(type="file" name="icon" class="form-control" required)
-    .icon
-    .form-group
-      label(for="screenshots") Screenshots
-        span(class="required")
-      input#screenshots(type="file" name="screenshots" class="form-control" required multiple)
-    .screenshots
-      .row(class="mb-2 p-2 screenshots__list" id="screenshots__list") 
-    button(type="submit" class="btn btn-primary create-button") Create
+  +content("new-project")
+    h1(class="text-center") New project
+    form(method="post" class="new-form")
+      .form-group
+        label(for="title") Title
+        input#title(type="text"  name="title" class="form-control" placeholder="Title" required)
+      .form-group
+        label(for="description") Description
+        textarea#description(name="description" class="form-control" placeholder="Description" rows="3" required)
+      .form-group
+        label(for="google-link") Google Play link
+        input#google-link(type="url" name="google-link" class="form-control" placeholder="Link" required)
+      .form-group
+        label(for="icon") Icon
+        input#icon(type="file" name="icon" class="form-control" required)
+      .icon
+      .form-group
+        label(for="screenshots") Screenshots
+          span(class="required")
+        input#screenshots(type="file" name="screenshots" class="form-control" required multiple)
+      .screenshots
+        .row(class="mb-2 p-2 screenshots__list" id="screenshots__list") 
+      button(type="submit" class="btn btn-primary create-button") Create
 
 append scripts
   script(src="scripts/js/new-project.js")
