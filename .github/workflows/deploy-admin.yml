@@ -13,9 +13,19 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
+    - name: Set up environment
+      run: npm i -g yarn gulp-cli
+    - name: Build admin cms
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        cd projects/admin-cms
+        yarn
+        yarn prod
+        
+  deploy:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - name: Deploy to Heroku
+        uses: actions/heroku@1.0.0
