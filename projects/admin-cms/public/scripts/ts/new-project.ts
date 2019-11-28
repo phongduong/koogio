@@ -1,17 +1,12 @@
-import { POST, UPLOAD } from "./request";
-import { HTMLInputEvent } from "./interfaces";
-import {
-  getFieldValue,
-  drawIcon,
-  drawScreenshotList,
-} from "./helpers";
+import { POST, UPLOAD } from "./_request";
+import { HTMLInputEvent, Data } from "./_interfaces";
+import { getFieldValue, drawIcon, drawScreenshotList } from "./_helpers";
 
 const screenshotsParentNode: Element = document.querySelector(
   "#screenshots__list"
 );
 const iconParentNode: Element = document.querySelector(".icon");
-let iconURL: string = "";
-let screenshotURLs: string[] = [];
+const newData = new Data();
 
 document
   .querySelector("#screenshots")
@@ -29,9 +24,9 @@ document
     try {
       const response = await UPLOAD(formData);
       const { urls } = await response;
-      screenshotURLs = urls;
+      newData.setScreenshotURLs(urls);
 
-      drawScreenshotList(screenshotsParentNode, screenshotURLs);
+      drawScreenshotList(screenshotsParentNode, newData);
     } catch (error) {
       console.error(error);
     }
@@ -52,7 +47,7 @@ document
         urls: [url]
       } = data;
 
-      iconURL = url;
+      newData.setIconURL(url);
       drawIcon(iconParentNode, url);
     } catch (error) {
       console.error(error);
@@ -67,8 +62,8 @@ document.querySelector(".new-form").addEventListener("submit", async e => {
       title: getFieldValue("title"),
       description: getFieldValue("description"),
       googleLink: getFieldValue("google-link"),
-      icon: iconURL,
-      screenshots: screenshotURLs
+      icon: newData.getIconURL(),
+      screenshots: newData.getScreenshotURLs()
     });
     await POST("/projects", data);
 

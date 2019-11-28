@@ -11,7 +11,7 @@ import {
   HttpStatus
 } from "@nestjs/common";
 import { ProjectsService } from "./projects.service";
-import { IProject } from "./project.class";
+import { IProject } from "./project.interface";
 
 @Controller("projects")
 export class ProjectsController {
@@ -60,5 +60,15 @@ export class ProjectsController {
   }
 
   @Delete(":id")
-  async deleteProject(@Param("id") id): Promise<any> {}
+  async deleteProject(@Param("id") id, @Res() res): Promise<any> {
+    try {
+      await this.projectsService.delete(id);
+
+      return res.status(HttpStatus.OK).json({ data: { deleted: true } });
+    } catch (error) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
+    }
+  }
 }

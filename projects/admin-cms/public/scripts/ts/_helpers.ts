@@ -1,4 +1,4 @@
-import { HTMLInputEvent, IScreenshot } from "./interfaces";
+import { HTMLInputEvent, IScreenshot, Data } from "./_interfaces";
 
 export const getFieldValue = (id: string) =>
   ((document.getElementById(id) as unknown) as HTMLInputEvent).value;
@@ -10,11 +10,11 @@ export const drop = (
   e: HTMLInputEvent,
   currentURL: IScreenshot,
   screenshotsNode: Element,
-  screenshotURLs: string[]
-): string[] => {
+  data: Data
+): void => {
   e.preventDefault();
   const newURL = JSON.parse(e.dataTransfer.getData("text"));
-  const newScreenshotURLS = screenshotURLs.map((url, index) => {
+  const newScreenshotURLS = data.getScreenshotURLs().map((url, index) => {
     if (index === newURL.index) {
       return currentURL.url;
     }
@@ -26,20 +26,19 @@ export const drop = (
     return url;
   });
 
-  drawScreenshotList(screenshotsNode, newScreenshotURLS);
-
-  return newScreenshotURLS;
+  data.setScreenshotURLs(newScreenshotURLS);
+  drawScreenshotList(screenshotsNode, data);
 };
 
 export const drawScreenshotList = (
   screenshotsNode: Element,
-  urls: string[]
-) => {
+  data: Data
+): void => {
   while (screenshotsNode.firstChild) {
     screenshotsNode.removeChild(screenshotsNode.firstChild);
   }
 
-  urls.forEach((url, index) => {
+  data.getScreenshotURLs().forEach((url, index) => {
     const node = document.createElement("div");
     const imgNode = document.createElement("img");
 
@@ -56,21 +55,17 @@ export const drawScreenshotList = (
     node.appendChild(imgNode);
     screenshotsNode.appendChild(node);
 
-    document
-      .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener("dragstart", (e: HTMLInputEvent) =>
-        drag(e, { index, url })
-      );
+    node.addEventListener("dragstart", (e: HTMLInputEvent) =>
+      drag(e, { index, url })
+    );
 
-    document
-      .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener("drop", (e: HTMLInputEvent) =>
-        drop(e, { index, url }, screenshotsNode, urls)
-      );
+    node.addEventListener("drop", (e: HTMLInputEvent) =>
+      drop(e, { index, url }, screenshotsNode, data)
+    );
 
-    document
-      .querySelector(`.screenshots__list__item__${index}`)
-      .addEventListener("dragover", (e: HTMLInputEvent) => e.preventDefault());
+    node.addEventListener("dragover", (e: HTMLInputEvent) =>
+      e.preventDefault()
+    );
   });
 };
 
