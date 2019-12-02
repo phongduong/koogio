@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "docsify serve docs"
+    "start": "docsify serve . --open"
   },
   "devDependencies": {
     "docsify": "^4.9.4"
