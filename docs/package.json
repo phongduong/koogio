@@ -6,7 +6,5 @@
   "scripts": {
     "start": "docsify serve . --open"
   },
-  "devDependencies": {
-    "docsify": "^4.9.4"
-  }
+  "devDependencies": {}
 }
