@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, NestModule, MiddlewareConsumer } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ProjectsController } from "./projects/projects.controller";
@@ -7,6 +7,7 @@ import { ConfigService } from "./config/config.service";
 import { FirebaseService } from "./firebase/firebase.service";
 import { ImagesController } from "./images/images.controller";
 import { ImagesService } from "./images/images.service";
+import { SecureRouteMiddleware } from "./secure-route.middleware";
 
 @Module({
   controllers: [AppController, ProjectsController, ImagesController],
@@ -18,4 +19,8 @@ import { ImagesService } from "./images/images.service";
     ProjectsService
   ]
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(SecureRouteMiddleware).forRoutes(ProjectsController);
+  }
+}
