@@ -1,0 +1,12 @@
+extends utils/layout.pug
+
+append style
+  link(rel="stylesheet" href="style/css/style.css")
+
+block content
+  +content("sign-in")
+    h1(class="text-center") Sign in
+    #firebaseui-auth-container
+
+append scripts
+  script(src="scripts/js/sign-in.js")
