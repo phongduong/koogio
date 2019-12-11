@@ -16,8 +16,8 @@ block content
                 h5.card-title= project.title
                 p.card-text= project.description
                 span(class="d-flex flex-column")
-                  a(class="btn btn-primary mb-1" href=`projects/${project.id}`) Edit
-                  button(class="btn btn-danger delete" data-id=project.id) Delete
+                  a(class="btn btn-primary mb-1 btn-lg" href=`projects/${project.id}`) Edit
+                  button(class="btn btn-danger btn-lg delete" data-id=project.id) Delete
     else
       h3(class="text-center") Empty
 append scripts
