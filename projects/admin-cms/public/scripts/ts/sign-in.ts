@@ -21,7 +21,7 @@ ui.start("#firebaseui-auth-container", {
   callbacks: {
     signInSuccessWithAuthResult: authResult => {
       if (authResult) {
-        setCookie("accessToken", authResult.credential.accessToken);
+        setCookie("idToken", authResult.credential.idToken);
       }
 
       return true;

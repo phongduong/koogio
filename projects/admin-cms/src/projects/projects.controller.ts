@@ -36,7 +36,7 @@ export class ProjectsController {
     try {
       const data = await this.projectsService.get(id);
 
-      return { title: data.title, data: { ...data, id }, authenticated: true };
+      return { title: data.title, data: { ...data, id } };
     } catch (error) {
       return { title: error.message };
     }
