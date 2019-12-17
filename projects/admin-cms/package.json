@@ -6,7 +6,6 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
-    "prod": "yarn build",
     "build": "yarn nest build && yarn gulp:prod",
     "format": "prettier --write \"src/**/*.ts\" \"public/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -53,6 +52,7 @@
     "dotenv": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-better-rollup": "^4.0.1",
+    "gulp-cli": "^2.2.0",
     "gulp-minify": "^3.1.0",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
