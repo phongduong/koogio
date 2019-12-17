@@ -1,10 +1,10 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 
 @Injectable()
-export class SecureRouteMiddleware implements NestMiddleware {
+export class UnsecureRouteMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
-    if (!req.cookies.accessToken) {
-      return res.redirect("/sign-in");
+    if (req.cookies.idToken) {
+      return res.redirect("/");
     }
 
     next();

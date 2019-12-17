@@ -22,4 +22,8 @@ export class FirebaseService {
   getFirestore() {
     return admin.firestore();
   }
+
+  getAuth() {
+    return admin.auth()
+  }
 }

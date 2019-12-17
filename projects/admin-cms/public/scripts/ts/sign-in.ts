@@ -21,10 +21,16 @@ ui.start("#firebaseui-auth-container", {
   callbacks: {
     signInSuccessWithAuthResult: authResult => {
       if (authResult) {
-        setCookie("accessToken", authResult.credential.accessToken);
-      }
+        firebase
+          .auth()
+          .currentUser.getIdToken(true)
+          .then(idToken => {
+            setCookie("idToken", idToken);
 
-      return true;
+            location.href = "/";
+          })
+          .catch(error => {});
+      }
     }
   },
   signInSuccessUrl: "/"
