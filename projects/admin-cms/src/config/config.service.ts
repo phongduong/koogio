@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import * as dotenv from "dotenv";
 
-if (process.env.NODE_ENV !== "production") dotenv.config();
+dotenv.config();
 
 @Injectable()
 export class ConfigService {
