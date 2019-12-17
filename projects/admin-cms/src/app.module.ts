@@ -12,7 +12,8 @@ import { ConfigService } from "./config/config.service";
 import { FirebaseService } from "./firebase/firebase.service";
 import { ImagesController } from "./images/images.controller";
 import { ImagesService } from "./images/images.service";
-import { SecureRouteMiddleware } from "./secure-route.middleware";
+import { SecureRouteMiddleware } from "./middlewares/secure-route.middleware";
+import { UnsecureRouteMiddleware } from "./middlewares/unsecure-route.middleware";
 
 @Module({
   controllers: [AppController, ProjectsController, ImagesController],
@@ -32,5 +33,8 @@ export class AppModule implements NestModule {
       .apply(SecureRouteMiddleware)
       .exclude({ path: "/sign-in", method: RequestMethod.GET })
       .forRoutes(AppController);
+    consumer
+      .apply(UnsecureRouteMiddleware)
+      .forRoutes({ path: "/sign-in", method: RequestMethod.GET });
   }
 }

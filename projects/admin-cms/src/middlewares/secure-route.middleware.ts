@@ -1,5 +1,5 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
-import { FirebaseService } from "./firebase/firebase.service";
+import { FirebaseService } from "../firebase/firebase.service";
 
 @Injectable()
 export class SecureRouteMiddleware implements NestMiddleware {
@@ -16,14 +16,7 @@ export class SecureRouteMiddleware implements NestMiddleware {
 
     try {
       const idToken = req.cookies.idToken;
-
-      const { uid } = await this.auth.verifyIdToken(idToken);
-
-      if (uid) {
-        res.authenticated = true;
-      } else {
-        return res.redirect("/sign-in");
-      }
+      await this.auth.verifyIdToken(idToken);
 
       next();
     } catch (error) {

@@ -13,7 +13,7 @@ export class AppController {
     try {
       const data = await this.projectsService.getAll();
 
-      return { title, data };
+      return { title, data, authenticated: true };
     } catch (error) {
       return { title: error.message };
     }
@@ -22,12 +22,12 @@ export class AppController {
   @Get("new")
   @Render("new")
   newProject() {
-    return { title: "New project" };
+    return { title: "New project", authenticated: true };
   }
 
   @Get("sign-in")
   @Render("sign-in")
   signIn() {
-    return { title: "Sign in" };
+    return { title: "Sign in", authenticated: false };
   }
 }
