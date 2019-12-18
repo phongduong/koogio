@@ -20,6 +20,7 @@ export class SecureRouteMiddleware implements NestMiddleware {
 
       next();
     } catch (error) {
+      res.clearCookie("idToken");
       res.redirect("/sign-in");
     }
   }
