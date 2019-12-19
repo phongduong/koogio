@@ -1,11 +1,12 @@
 const { src, dest, series, parallel, watch } = require("gulp");
 const sass = require("gulp-sass");
 const rollup = require("gulp-better-rollup");
-const rollupTypescriptPlugin = require("rollup-plugin-typescript");
 const rename = require("gulp-rename");
 const postcss = require("gulp-postcss");
 const minify = require("gulp-minify");
 const sourcemaps = require("gulp-sourcemaps");
+const rollupPluginTypescript = require("@rollup/plugin-typescript");
+const resolve = require("@rollup/plugin-node-resolve");
 
 const cssDev = () =>
   src("public/style/scss/**/*.scss")
@@ -14,7 +15,12 @@ const cssDev = () =>
 
 const jsDev = () =>
   src(["public/scripts/ts/*.ts", "!public/scripts/ts/_*.ts"])
-    .pipe(rollup({ plugins: [rollupTypescriptPlugin()] }, { format: "umd" }))
+    .pipe(
+      rollup(
+        { plugins: [rollupPluginTypescript(), resolve()] },
+        { format: "umd" }
+      )
+    )
     .pipe(
       rename({
         extname: ".js"
@@ -33,7 +39,12 @@ const cssProd = () =>
 const jsProd = () =>
   src(["public/scripts/ts/*.ts", "!public/scripts/ts/_*.ts"])
     .pipe(sourcemaps.init())
-    .pipe(rollup({ plugins: [rollupTypescriptPlugin()] }, { format: "umd" }))
+    .pipe(
+      rollup(
+        { plugins: [rollupPluginTypescript(), resolve()] },
+        { format: "umd" }
+      )
+    )
     .pipe(
       rename({
         extname: ".js"
