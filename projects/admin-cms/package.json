@@ -31,14 +31,12 @@
     "pug": "^2.0.4",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
-    "rxjs": "^6.5.3",
-    "sweetalert2": "^9.5.3"
+    "rxjs": "^6.5.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.9.0",
     "@nestjs/schematics": "^6.7.0",
     "@nestjs/testing": "^6.7.1",
-    "@rollup/plugin-node-resolve": "^6.0.0",
     "@rollup/plugin-typescript": "^2.0.1",
     "@types/cookie-parser": "^1.4.2",
     "@types/dotenv": "^6.1.1",

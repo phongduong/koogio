@@ -6,7 +6,6 @@ const postcss = require("gulp-postcss");
 const minify = require("gulp-minify");
 const sourcemaps = require("gulp-sourcemaps");
 const rollupPluginTypescript = require("@rollup/plugin-typescript");
-const resolve = require("@rollup/plugin-node-resolve");
 
 const cssDev = () =>
   src("public/style/scss/**/*.scss")
@@ -17,8 +16,12 @@ const jsDev = () =>
   src(["public/scripts/ts/*.ts", "!public/scripts/ts/_*.ts"])
     .pipe(
       rollup(
-        { plugins: [rollupPluginTypescript(), resolve()] },
-        { format: "umd" }
+        {
+          plugins: [rollupPluginTypescript()]
+        },
+        {
+          format: "umd"
+        }
       )
     )
     .pipe(
@@ -41,8 +44,12 @@ const jsProd = () =>
     .pipe(sourcemaps.init())
     .pipe(
       rollup(
-        { plugins: [rollupPluginTypescript(), resolve()] },
-        { format: "umd" }
+        {
+          plugins: [rollupPluginTypescript()]
+        },
+        {
+          format: "umd"
+        }
       )
     )
     .pipe(
