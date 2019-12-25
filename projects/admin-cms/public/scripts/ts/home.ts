@@ -1,4 +1,5 @@
-import Swal from "sweetalert2";
+declare const Swal;
+
 import { DELETE } from "./_request";
 import { HTMLInputEvent } from "./_interfaces";
 
@@ -23,7 +24,7 @@ document.querySelectorAll(".delete").forEach(deleteButton =>
         return deleted;
       }
     }).then(result => {
-      if (result) {
+      if (result.value) {
         location.href = "/";
       }
     });
