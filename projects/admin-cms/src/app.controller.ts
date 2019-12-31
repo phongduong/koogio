@@ -1,4 +1,4 @@
-import { Get, Controller, Render } from "@nestjs/common";
+import { Get, Controller, Render, Param } from "@nestjs/common";
 import { ProjectsService } from "./projects/projects.service";
 
 @Controller()
@@ -29,5 +29,17 @@ export class AppController {
   @Render("sign-in")
   signIn() {
     return { title: "Sign in", authenticated: false };
+  }
+
+  @Get(":id")
+  @Render("project")
+  async getProjectById(@Param("id") id): Promise<any> {
+    try {
+      const data = await this.projectsService.get(id);
+
+      return { title: data.title, data: { ...data, id }, authenticated: true };
+    } catch (error) {
+      return { title: error.message };
+    }
   }
 }

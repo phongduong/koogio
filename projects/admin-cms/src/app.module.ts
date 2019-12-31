@@ -2,39 +2,54 @@ import {
   Module,
   NestModule,
   MiddlewareConsumer,
-  RequestMethod
+  RequestMethod,
+  forwardRef
 } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { ProjectsController } from "./projects/projects.controller";
-import { ProjectsService } from "./projects/projects.service";
 import { ConfigService } from "./config/config.service";
 import { FirebaseService } from "./firebase/firebase.service";
-import { ImagesController } from "./images/images.controller";
-import { ImagesService } from "./images/images.service";
 import { SecureRouteMiddleware } from "./middlewares/secure-route.middleware";
 import { UnsecureRouteMiddleware } from "./middlewares/unsecure-route.middleware";
+import { ApiModule } from "./api/api.module";
+import { ProjectsModule } from "./projects/projects.module";
+import { FilesModule } from "./files/files.module";
+import { RouterModule, Routes } from "nest-router";
 
+const routes: Routes = [
+  {
+    path: "api/v1",
+    module: ApiModule,
+    children: [
+      {
+        path: "/",
+        module: ProjectsModule
+      },
+      {
+        path: "/",
+        module: FilesModule
+      }
+    ]
+  }
+];
 @Module({
-  controllers: [AppController, ProjectsController, ImagesController],
-  providers: [
-    AppService,
-    ConfigService,
-    FirebaseService,
-    ImagesService,
-    ProjectsService
+  controllers: [AppController],
+  providers: [AppService, ConfigService, FirebaseService],
+  exports: [FirebaseService],
+  imports: [
+    RouterModule.forRoutes(routes),
+    forwardRef(() => ProjectsModule),
+    forwardRef(() => FilesModule)
   ]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(SecureRouteMiddleware).forRoutes(ProjectsController);
-    consumer.apply(SecureRouteMiddleware).forRoutes(ImagesController);
-    consumer
-      .apply(SecureRouteMiddleware)
-      .exclude({ path: "/sign-in", method: RequestMethod.GET })
-      .forRoutes(AppController);
-    consumer
-      .apply(UnsecureRouteMiddleware)
-      .forRoutes({ path: "/sign-in", method: RequestMethod.GET });
+    // consumer
+    //   .apply(SecureRouteMiddleware)
+    //   .exclude({ path: "/sign-in", method: RequestMethod.GET })
+    //   .forRoutes(AppController);
+    // consumer
+    //   .apply(UnsecureRouteMiddleware)
+    //   .forRoutes({ path: "/sign-in", method: RequestMethod.GET });
   }
 }

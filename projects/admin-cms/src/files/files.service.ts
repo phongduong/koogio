@@ -2,15 +2,15 @@ import { Injectable } from "@nestjs/common";
 import { FirebaseService } from "../firebase/firebase.service";
 
 @Injectable()
-export class ImagesService {
+export class FilesService {
   private readonly bucket;
 
   constructor(private readonly firebaseService: FirebaseService) {
     this.bucket = firebaseService.getBucket();
   }
 
-  async upload(images): Promise<string[]> {
-    const paths = images.map(image => image.path);
+  async upload(filesToUpload): Promise<string[]> {
+    const paths = filesToUpload.map(file => file.path);
     const uploadOptions = { gzip: true, public: true };
 
     return await Promise.all(

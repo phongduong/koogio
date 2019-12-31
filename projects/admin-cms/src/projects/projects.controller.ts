@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Render,
   Post,
   Body,
   Param,
@@ -31,7 +30,6 @@ export class ProjectsController {
   }
 
   @Get(":id")
-  @Render("project")
   async getProjectById(@Param("id") id): Promise<any> {
     try {
       const data = await this.projectsService.get(id);

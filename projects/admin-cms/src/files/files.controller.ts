@@ -7,7 +7,7 @@ import {
   HttpStatus
 } from "@nestjs/common";
 import { FilesInterceptor } from "@nestjs/platform-express";
-import { ImagesService } from "./images.service";
+import { FilesService } from "./files.service";
 import { diskStorage } from "multer";
 
 const storage = diskStorage({
@@ -18,8 +18,8 @@ const storage = diskStorage({
 });
 
 @Controller("images")
-export class ImagesController {
-  constructor(private readonly imagesService: ImagesService) {}
+export class FilesController {
+  constructor(private readonly imagesService: FilesService) {}
 
   @Post("upload")
   @UseInterceptors(FilesInterceptor("files", 4, { storage }))
