@@ -7,7 +7,7 @@ import {
   HttpStatus
 } from "@nestjs/common";
 import { FilesInterceptor } from "@nestjs/platform-express";
-import { ImagesService } from "./images.service";
+import { FilesService } from "./files.service";
 import { diskStorage } from "multer";
 
 const storage = diskStorage({
@@ -17,14 +17,14 @@ const storage = diskStorage({
   }
 });
 
-@Controller("images")
-export class ImagesController {
-  constructor(private readonly imagesService: ImagesService) {}
+@Controller("files")
+export class FilesController {
+  constructor(private readonly filesService: FilesService) {}
 
   @Post("upload")
   @UseInterceptors(FilesInterceptor("files", 4, { storage }))
-  async uploadImages(@Res() res, @UploadedFiles() files): Promise<string[]> {
-    return await this.imagesService
+  async uploadFiles(@Res() res, @UploadedFiles() files): Promise<string[]> {
+    return await this.filesService
       .upload(files)
       .then(urls => res.status(HttpStatus.CREATED).json({ urls }))
       .catch(error =>
