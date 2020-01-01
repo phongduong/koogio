@@ -17,14 +17,14 @@ const storage = diskStorage({
   }
 });
 
-@Controller("images")
+@Controller("files")
 export class FilesController {
-  constructor(private readonly imagesService: FilesService) {}
+  constructor(private readonly filesService: FilesService) {}
 
   @Post("upload")
   @UseInterceptors(FilesInterceptor("files", 4, { storage }))
-  async uploadImages(@Res() res, @UploadedFiles() files): Promise<string[]> {
-    return await this.imagesService
+  async uploadFiles(@Res() res, @UploadedFiles() files): Promise<string[]> {
+    return await this.filesService
       .upload(files)
       .then(urls => res.status(HttpStatus.CREATED).json({ urls }))
       .catch(error =>

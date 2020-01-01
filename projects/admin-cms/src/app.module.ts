@@ -9,8 +9,8 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ConfigService } from "./config/config.service";
 import { FirebaseService } from "./firebase/firebase.service";
-import { SecureRouteMiddleware } from "./middlewares/secure-route.middleware";
-import { UnsecureRouteMiddleware } from "./middlewares/unsecure-route.middleware";
+import { SecureRenderMiddleware } from "./middlewares/secure-render.middleware";
+import { UnsecureRenderMiddleware } from "./middlewares/unsecure-render.middleware";
 import { ApiModule } from "./api/api.module";
 import { ProjectsModule } from "./projects/projects.module";
 import { FilesModule } from "./files/files.module";
@@ -32,6 +32,7 @@ const routes: Routes = [
     ]
   }
 ];
+
 @Module({
   controllers: [AppController],
   providers: [AppService, ConfigService, FirebaseService],
@@ -39,17 +40,16 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoutes(routes),
     forwardRef(() => ProjectsModule),
-    forwardRef(() => FilesModule)
+    forwardRef(() => FilesModule),
+    ApiModule
   ]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // consumer
-    //   .apply(SecureRouteMiddleware)
-    //   .exclude({ path: "/sign-in", method: RequestMethod.GET })
-    //   .forRoutes(AppController);
-    // consumer
-    //   .apply(UnsecureRouteMiddleware)
-    //   .forRoutes({ path: "/sign-in", method: RequestMethod.GET });
+    consumer
+      .apply(SecureRenderMiddleware)
+      .exclude({ path: "/sign-in", method: RequestMethod.GET })
+      .forRoutes(AppController);
+    consumer.apply(UnsecureRenderMiddleware).forRoutes("/sign-in");
   }
 }

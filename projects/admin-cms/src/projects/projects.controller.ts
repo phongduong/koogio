@@ -29,14 +29,29 @@ export class ProjectsController {
     }
   }
 
+  @Get()
+  async listProjects(@Res() res): Promise<any> {
+    try {
+      const data = await this.projectsService.getAll();
+
+      return res.status(HttpStatus.OK).json({ data });
+    } catch (error) {
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
+    }
+  }
+
   @Get(":id")
-  async getProjectById(@Param("id") id): Promise<any> {
+  async getProjectById(@Param("id") id, @Res() res): Promise<any> {
     try {
       const data = await this.projectsService.get(id);
 
-      return { title: data.title, data: { ...data, id }, authenticated: true };
+      return res.status(HttpStatus.OK).json({ data });
     } catch (error) {
-      return { title: error.message };
+      return res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ error: error.message });
     }
   }
 

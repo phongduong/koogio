@@ -2,7 +2,7 @@ import { Injectable, NestMiddleware } from "@nestjs/common";
 import { FirebaseService } from "../firebase/firebase.service";
 
 @Injectable()
-export class SecureRouteMiddleware implements NestMiddleware {
+export class SecureRenderMiddleware implements NestMiddleware {
   private readonly auth;
 
   constructor(private readonly firebaseService: FirebaseService) {

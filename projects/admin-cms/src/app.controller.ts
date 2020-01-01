@@ -25,13 +25,7 @@ export class AppController {
     return { title: "New project", authenticated: true };
   }
 
-  @Get("sign-in")
-  @Render("sign-in")
-  signIn() {
-    return { title: "Sign in", authenticated: false };
-  }
-
-  @Get(":id")
+  @Get("detail/:id")
   @Render("project")
   async getProjectById(@Param("id") id): Promise<any> {
     try {
@@ -41,5 +35,11 @@ export class AppController {
     } catch (error) {
       return { title: error.message };
     }
+  }
+
+  @Get("sign-in")
+  @Render("sign-in")
+  signIn() {
+    return { title: "Sign in", authenticated: false };
   }
 }
