@@ -1,12 +1,21 @@
 {
   "name": "koogio-website",
   "private": true,
+  "version": "1.0.0",
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
     "explore": "gridsome explore"
   },
+  "license": "MIT",
   "dependencies": {
-    "gridsome": "^0.7.0"
+    "axios": "^0.19.0",
+    "gridsome": "^0.7.12"
+  },
+  "devDependencies": {
+    "gridsome-plugin-pwa": "^0.0.10",
+    "gridsome-plugin-tailwindcss": "^2.2.30",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0"
   }
 }
