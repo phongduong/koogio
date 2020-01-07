@@ -1,6 +1,8 @@
 <template lang="pug">
-  .layout
-    header.header
+  main(
+    class="layout container mx-auto py-4 px-2"
+    )
+    header(class="header flex justify-center")
       nav.nav
         g-link.nav__link(
           to="/"
@@ -11,7 +13,9 @@
             height="32px" 
           )
     slot 
-    footer.footer
+    footer(
+      class="footer flex justify-center"
+      )
       p Designed &amp; developed by KOOGIO
 </template>
 

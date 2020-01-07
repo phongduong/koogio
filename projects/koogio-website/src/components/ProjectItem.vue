@@ -1,8 +1,15 @@
 <template lang="pug">
-  section.project-item
-    h2 {{ project.title }}
+  section(
+    class="project-item flex items-center flex-col"
+    )
+    g-image(
+      :src="project.icon"
+    )
+    h2(
+      class="text-5xl"
+    ) {{ project.title }}
     g-link(
-      to="/project/"
+      :to="`/project/${project.id}/`"
     ) See more
 </template>
 
@@ -10,10 +17,7 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  props: ["project"],
-  mounted() {
-    console.log(this.project.project)
-  }
+  props: ["project"]
 });
 </script>
 
