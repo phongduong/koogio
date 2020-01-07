@@ -17,8 +17,8 @@ import { RouterModule } from "nest-router";
 })
 export class FilesModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // consumer
-    //   .apply(SercureApiMiddleware)
-    //   .forRoutes(RouterModule.resolvePath(FilesController));
+    consumer
+      .apply(SercureApiMiddleware)
+      .forRoutes(RouterModule.resolvePath(FilesController));
   }
 }
