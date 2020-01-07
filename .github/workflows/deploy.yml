@@ -18,6 +18,6 @@ jobs:
     - name: ZEIT Now Deployment
       uses: amondnet/now-deployment@v1
       with:
-        zeit-token: ${{ secrets.ZEIT_TOKENN }}
-        github-token: ${{ secrets.GITHUB_TOKE }}
+        zeit-token: ${{ secrets.ZEIT_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         now-args: './dist --name koogio --prod --public'
