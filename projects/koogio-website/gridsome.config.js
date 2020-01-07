@@ -12,7 +12,14 @@ module.exports = {
     Project: "/project/:id"
   },
   configureWebpack: {
-    // merged with the internal config
+    module: {
+      rules: [
+        {
+          test: /\.pug$/,
+          loader: "pug-plain-loader"
+        }
+      ]
+    }
   },
   plugins: [
     {

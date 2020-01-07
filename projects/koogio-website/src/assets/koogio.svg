@@ -14,7 +14,7 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="koogio.svg">
   <defs
      id="defs2" />
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="85.160379"
-     inkscape:cy="716.92888"
+     inkscape:cx="369.0984"
+     inkscape:cy="831.21459"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -37,10 +37,10 @@
      inkscape:snap-page="false"
      inkscape:snap-nodes="true"
      inkscape:snap-bbox="true"
-     inkscape:window-width="1600"
-     inkscape:window-height="835"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-width="1024"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -54,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -62,15 +62,28 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <path
-       style="fill:none;stroke:#7f7a3f;stroke-width:8.47867584;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
-       d="m 27.975439,27.191379 v 126.867241 0"
-       id="path4534"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;stroke:#7f7a3f;stroke-width:8.47867584;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 154.90263,35.12058 H 82.372805 L 37.041667,90.624992 82.372805,146.1294 H 154.90263 V 90.624992 h -54.39738"
-       id="path4540"
-       inkscape:connector-curvature="0" />
+    <g
+       id="g845"
+       inkscape:export-filename="F:\app\koogio\projects\koogio-website\src\favicon.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4534"
+         d="m 27.975439,27.191379 v 126.867241 0"
+         style="fill:none;stroke:#7f7a3f;stroke-width:8.46666669;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:12;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4540"
+         d="M 154.90263,35.12058 H 82.372805 L 37.041667,90.624992 82.372805,146.1294 H 154.90263 V 90.624992 h -54.39738"
+         style="fill:none;stroke:#7f7a3f;stroke-width:8.46666669;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:12;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <rect
+       style="opacity:1;fill:#7f7a3f;fill-opacity:1;stroke:none;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect837"
+       width="10.583333"
+       height="10.583333"
+       x="31.750002"
+       y="0.66665852" />
   </g>
 </svg>

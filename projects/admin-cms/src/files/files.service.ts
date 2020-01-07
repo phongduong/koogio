@@ -15,8 +15,8 @@ export class FilesService {
 
     return await Promise.all(
       paths.map(path => this.bucket.upload(path, uploadOptions))
-    )
-      .then(response => response.map(file => file[1]))
-      .then(files => files.map(file => file.mediaLink));
+    ).then(response => {
+      return response.map(file => file[1].mediaLink);
+    });
   }
 }
