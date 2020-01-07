@@ -9,10 +9,10 @@ import { ProjectsService } from "./projects.service";
 import { ProjectsController } from "./projects.controller";
 import { AppModule } from "../app.module";
 import { SercureApiMiddleware } from "../middlewares/sercure-api.middleware";
-import { RouterModule } from "nest-router";
+import { ConfigService } from "../config/config.service";
 
 @Module({
-  providers: [ProjectsService],
+  providers: [ProjectsService, ConfigService],
   controllers: [ProjectsController],
   exports: [ProjectsService],
   imports: [forwardRef(() => AppModule)]
