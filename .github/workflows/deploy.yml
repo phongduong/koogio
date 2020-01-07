@@ -14,10 +14,9 @@ jobs:
         npm install --global @gridsome/cli
         cd projects/koogio-website
         npm install
-        npm run build    
     - name: ZEIT Now Deployment
       uses: amondnet/now-deployment@v1
       with:
         zeit-token: ${{ secrets.ZEIT_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        now-args: './dist --name koogio --prod --public'
+        now-args: '--name koogio --prod --public'
