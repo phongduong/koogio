@@ -25,11 +25,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="369.0984"
-     inkscape:cy="831.21459"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="262.49461"
+     inkscape:cy="794.73506"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g845"
      showgrid="true"
      inkscape:measure-start="0,0"
      inkscape:measure-end="0,0"
@@ -66,24 +66,26 @@
        id="g845"
        inkscape:export-filename="F:\app\koogio\projects\koogio-website\src\favicon.png"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96">
+       inkscape:export-ydpi="96"
+       transform="matrix(0.86829408,0,0,0.89563491,-1.6104877,21.438742)"
+       inkscape:label="g845">
       <path
          inkscape:connector-curvature="0"
          id="path4534"
-         d="m 27.975439,27.191379 v 126.867241 0"
-         style="fill:none;stroke:#7f7a3f;stroke-width:8.46666669;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:12;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 27.975439,27.960462 v 126.867238 0"
+         style="fill:none;stroke:#5b5a38;stroke-width:24.1133709;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:12;stroke-dasharray:none;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
          id="path4540"
-         d="M 154.90263,35.12058 H 82.372805 L 37.041667,90.624992 82.372805,146.1294 H 154.90263 V 90.624992 h -54.39738"
-         style="fill:none;stroke:#7f7a3f;stroke-width:8.46666669;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:12;stroke-dasharray:none;stroke-opacity:1" />
+         d="M 159.70516,35.890275 H 87.175328 L 41.84419,91.394687 87.175328,146.89909 H 159.70516 V 91.394687 h -54.39739"
+         style="fill:none;stroke:#5b5a38;stroke-width:24.1133709;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:12;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <rect
-       style="opacity:1;fill:#7f7a3f;fill-opacity:1;stroke:none;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect837"
-       width="10.583333"
+       y="5.9583249"
+       x="10.583337"
        height="10.583333"
-       x="31.750002"
-       y="0.66665852" />
+       width="10.583333"
+       id="rect835"
+       style="opacity:1;fill:#5c5a39;fill-opacity:0.94117647;stroke:none;stroke-width:1.58749998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

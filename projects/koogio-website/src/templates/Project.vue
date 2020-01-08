@@ -1,6 +1,9 @@
 <template lang="pug">
   Layout
     .project-content
+      div(
+        class=""
+        )
       g-image(:src="$page.project.icon" width="100")
       h1 {{ $page.project.title }}
       p {{ $page.project.description }}

@@ -37,7 +37,7 @@ module.exports = {
         cachedFileTypes: "js,json,css,html,png,jpg,jpeg,svg",
         shortName: "KOOGIO",
         themeColor: "#7f7a3f",
-        backgroundColor: "#7f7a3f",
+        backgroundColor: "#ffffff",
         icon: "src/favicon.png",
         msTileImage: "src/favicon.png",
         msTileColor: "#7f7a3f"
