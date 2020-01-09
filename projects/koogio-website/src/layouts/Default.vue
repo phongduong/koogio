@@ -1,10 +1,8 @@
 <template lang="pug">
-  main(
-    class="layout container mx-auto py-4 px-2"
-    )
+  .content
     header(
-      class="header flex justify-center mb-4"
-      )
+      class="header flex justify-center py-2 bg-secondary"
+    )
       nav.nav
         g-link.nav__link(
           to="/"
@@ -15,9 +13,12 @@
             height="64px" 
             alt="Logo"
           )
-    slot 
+    main(
+      class="layout container my-4 mx-auto md:w-1/2"
+      )
+      slot 
     footer(
-      class="footer flex justify-center mt-4"
+      class="footer flex justify-center py-2 bg-secondary"
       )
       p(
         class="text-primary font-medium"

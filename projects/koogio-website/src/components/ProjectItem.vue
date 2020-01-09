@@ -1,6 +1,6 @@
 <template lang="pug">
   section(
-    class="project-item flex items-center flex-col py-4 border-dotted border-primary border-b-4"
+    :class="`project-item flex items-center flex-col py-4 ${border}`"
     )
     g-image(
       :src="project.icon"
@@ -19,7 +19,12 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  props: ["project"]
+  props: ["project", "hasBorder"],
+  computed: {
+    border: function() {
+      return this.hasBorder ? "border-dotted border-primary border-t-4" : "";
+    }
+  }
 });
 </script>
 
