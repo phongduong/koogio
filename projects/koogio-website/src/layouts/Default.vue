@@ -1,25 +1,31 @@
 <template lang="pug">
-  main(
-    class="layout container mx-auto py-4 px-2"
+  .content
+    header(
+      class="header flex justify-center py-2 bg-secondary"
     )
-    header(class="header flex justify-center")
       nav.nav
         g-link.nav__link(
           to="/"
         )
           g-image.logo(
             src="~/favicon.png" 
-            width="32px" 
-            height="32px" 
+            width="64px" 
+            height="64px" 
+            alt="Logo"
           )
-    slot 
-    footer(
-      class="footer flex justify-center"
+    main(
+      class="layout container my-4 mx-auto md:w-1/2"
       )
-      p Designed &amp; developed by KOOGIO
+      slot 
+    footer(
+      class="footer flex justify-center py-2 bg-secondary"
+      )
+      p(
+        class="text-primary font-medium"
+      ) Designed &amp; developed by KOOGIO
 </template>
 
 <static-query>
 </static-query>
 
-<style></style>
+<style lang="scss"></style>

@@ -1,10 +1,13 @@
 <template lang="pug">
   Layout
-    .project-list
+    div(
+      class="project-list"
+    )
       ProjectItem(
         v-for="(project, index) in $page.allProject.projects"
         :key="index"
         :project="project.project"
+        :has-border="!!index"
       )     
 </template>
 

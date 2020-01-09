@@ -8,18 +8,18 @@ const axios = require("axios");
 
 module.exports = function(api) {
   api.loadSource(async ({ addCollection }) => {
-    // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
     const {
       data: { data }
     } = await axios.get(
       "https://koogio-admin-cms.herokuapp.com/api/v1/projects"
     );
+    const sortedData = data.sort((a, b) => a.createTime - b.createTime);
 
     const collection = addCollection({
       typeName: "Project"
     });
 
-    for (const project of data) {
+    for (const project of sortedData) {
       const { id, description, title, googleLink, icon, screenshots } = project;
 
       collection.addNode({
