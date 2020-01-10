@@ -6,7 +6,7 @@
 
 module.exports = {
   siteName: "KOOGIO",
-  siteDescription: "KOOGIO is an indie game studio. We create casual games.",
+  siteDescription: "We are an indie game studio. We create casual games.",
   siteUrl: "https://koogio.now.sh",
   templates: {
     Project: "/project/:id"
@@ -41,6 +41,27 @@ module.exports = {
         icon: "src/favicon.png",
         msTileImage: "src/favicon.png",
         msTileColor: "#7f7a3f"
+      }
+    },
+    {
+      use: "@gridsome/plugin-sitemap"
+    },
+    {
+      use: "gridsome-plugin-rss",
+      options: {
+        contentTypeName: "Project",
+        latest: true,
+        dateField: "createTime",
+        feedOptions: {
+          title: "KOOGIO's Projects",
+          feed_url: "https://koogio.now.sh/rss.xml",
+          site_url: "https://koogio.now.sh"
+        },
+        feedItemOptions: node => ({
+          title: node.title,
+          description: node.description,
+          url: `https://koogio.now.sh/${node.id}`
+        })
       }
     }
   ]

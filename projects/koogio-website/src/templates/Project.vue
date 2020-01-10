@@ -1,7 +1,7 @@
 <template lang="pug">
   Layout
     div(
-      class="project-content flex flex-col justify-center py-4 px-2"
+      class="project-content flex flex-col justify-center"
       )
       div(
         class="project-content__icon self-center"
@@ -27,6 +27,8 @@
         ) 
           a(
             :href="$page.project.googleLink"
+            target="_blank"
+            rel="noopener noreferrer"
           ) Play Store
       div(
         class="project-content__screenshots mt-6"
@@ -38,7 +40,7 @@
           class="flex flex-wrap"
         )
           div(
-            class="project-content__screenshot__image w-1/4 md:w-1/2 p-1 md:p-2"
+            class="project-content__screenshot__image w-1/4 p-1 md:p-2"
             v-for="screenshot in $page.project.screenshots"
           )
             g-image(

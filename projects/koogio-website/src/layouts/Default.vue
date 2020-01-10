@@ -14,7 +14,7 @@
             alt="Logo"
           )
     main(
-      class="layout container my-4 mx-auto md:w-1/2"
+      class="layout container my-4 mx-auto md:w-1/2 py-4 px-2"
       )
       slot 
     footer(

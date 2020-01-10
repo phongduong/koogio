@@ -1,6 +1,15 @@
 <template lang="pug">
   Layout
     div(
+      class="description pt-4 pb-8"
+    )
+      h1(
+        class="text-5xl text-center text-primary"
+      ) About {{ $page.metadata.siteName }}
+      h3(
+        class="text-2xl text-primary"
+      ) {{ $page.metadata.siteDescription }}
+    div(
       class="project-list"
     )
       ProjectItem(
@@ -24,6 +33,10 @@
           screenshots
         }
       }
+    }
+    metadata {
+      siteName
+      siteDescription
     }
   }
 </page-query>
