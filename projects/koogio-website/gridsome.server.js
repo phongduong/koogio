@@ -20,7 +20,15 @@ module.exports = function(api) {
     });
 
     for (const project of sortedData) {
-      const { id, description, title, googleLink, icon, screenshots } = project;
+      const {
+        id,
+        description,
+        title,
+        googleLink,
+        icon,
+        screenshots,
+        createTime
+      } = project;
 
       collection.addNode({
         id,
@@ -28,7 +36,8 @@ module.exports = function(api) {
         description,
         googleLink,
         icon,
-        screenshots
+        screenshots,
+        createTime
       });
     }
   });
