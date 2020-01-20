@@ -12,6 +12,9 @@
     div(
       class="project-list"
     )
+      h1(
+        class="text-5xl text-center text-primary"
+      ) Our projects
       ProjectItem(
         v-for="(project, index) in $page.allProject.projects"
         :key="index"
