@@ -29,7 +29,6 @@ export class ProjectsController {
   async createProject(@Body() body: IProject, @Res() res): Promise<any> {
     try {
       await this.projectsService.create(body);
-      await this.dispatchGithubWebhook();
 
       return res.status(HttpStatus.CREATED).json({ data: body });
     } catch (error) {
@@ -73,7 +72,6 @@ export class ProjectsController {
   ): Promise<any> {
     try {
       await this.projectsService.update(id, body);
-      await this.dispatchGithubWebhook();
 
       return res.status(HttpStatus.OK).json({ data: body });
     } catch (error) {
@@ -87,7 +85,6 @@ export class ProjectsController {
   async deleteProject(@Param("id") id, @Res() res): Promise<any> {
     try {
       await this.projectsService.delete(id);
-      await this.dispatchGithubWebhook();
 
       return res.status(HttpStatus.OK).json({ data: { deleted: true } });
     } catch (error) {
@@ -97,17 +94,17 @@ export class ProjectsController {
     }
   }
 
-  async dispatchGithubWebhook() {
-    await axios.post(
-      "https://api.github.com/repos/phongduong/koogio/dispatches",
-      { event_type: "Deploy ZEIT Now" },
-      {
-        headers: {
-          Accept: "application/vnd.github.everest-preview+json",
-          Authorization: `token ${this.GITHUB_ACCESS_TOKEN}`,
-          "User-Agent": "phongduong"
-        }
-      }
-    );
-  }
+  // async dispatchGithubWebhook() {
+  //   await axios.post(
+  //     "https://api.github.com/repos/phongduong/koogio/dispatches",
+  //     { event_type: "Deploy ZEIT Now" },
+  //     {
+  //       headers: {
+  //         Accept: "application/vnd.github.everest-preview+json",
+  //         Authorization: `token ${this.GITHUB_ACCESS_TOKEN}`,
+  //         "User-Agent": "phongduong"
+  //       }
+  //     }
+  //   );
+  // }
 }

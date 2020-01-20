@@ -4,5 +4,4 @@ export interface IProject {
   googleLink: string;
   icon: string;
   screenshots: string[];
-  formatId(): string;
 }
