@@ -1,7 +1,7 @@
 <template lang="pug">
   .content
     header(
-      class="header flex justify-center py-2 bg-secondary"
+      class="header flex justify-center py-2"
     )
       nav.nav
         g-link.nav__link(
@@ -18,7 +18,7 @@
       )
       slot 
     footer(
-      class="footer flex justify-center py-2 bg-secondary"
+      class="footer flex justify-center py-2"
       )
       p(
         class="text-primary font-medium"

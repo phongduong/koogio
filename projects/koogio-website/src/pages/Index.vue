@@ -7,7 +7,7 @@
         class="text-5xl text-center text-primary"
       ) About {{ $page.metadata.siteName }}
       h3(
-        class="text-2xl text-primary"
+        class="text-2xl text-primary text-center"
       ) {{ $page.metadata.siteDescription }}
     div(
       class="project-list"
