@@ -6,9 +6,8 @@ on:
       - master
     paths: 
       - "projects/koogio-website/**"
-  repository_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 0 * * *'
       
 jobs:
   build:
