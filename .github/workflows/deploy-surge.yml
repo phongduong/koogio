@@ -4,8 +4,6 @@ on:
   push:
     branches: 
       - master
-    paths: 
-      - "projects/cms-website/**"
       
 jobs:
   build:
@@ -19,6 +17,7 @@ jobs:
         npm install -g surge gulp-cli
         cd projects/cms-website
         npm install
+        npm list
         npm run build
     - name: Deploy to Surge
       run: surge ./_site ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
