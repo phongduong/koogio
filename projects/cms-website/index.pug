@@ -3,7 +3,10 @@ layout: layouts/layout.pug
 ---
 nav.flex.justify-center
   a(href="/") 
-    img.w-32.h-32(src="./assets/img/favicon.png" alt="Logo")
+    img.w-32.h-32(
+      src="./assets/img/favicon.png" 
+      alt="Logo"
+    )
 main.my-20
   .links.flex.flex-col
     each link in data.links
