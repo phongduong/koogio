@@ -19,5 +19,5 @@ jobs:
         npm install
         npm run build
     - name: Deploy to Surge
-      run: surge ./_site ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+      run: surge ./projects/cms-website/_site ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
         
