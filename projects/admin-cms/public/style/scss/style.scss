@@ -1,3 +1,12 @@
 @import "new-project";
 @import "edit-project";
 @import "home";
+
+.navbar {
+  a.navbar-brand {
+    img {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+}

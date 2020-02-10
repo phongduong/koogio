@@ -1,21 +1,23 @@
 {
-  "name": "svelte-app",
+  "name": "cms-website",
   "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public"
+    "gulp:dev": "gulp dev",
+    "gulp:build": "gulp build",
+    "prestart": "yarn gulp:dev",
+    "start": "npx @11ty/eleventy --serve",
+    "prebuild": "yarn gulp:build",
+    "build": "npx @11ty/eleventy"
   },
   "devDependencies": {
-    "rollup": "^1.12.0",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-livereload": "^1.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-svelte": "^5.0.3",
-    "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0"
-  },
-  "dependencies": {
-    "sirv-cli": "^0.4.4"
+    "@11ty/eleventy": "^0.10.0",
+    "autoprefixer": "^9.7.4",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-purgecss": "^2.0.6",
+    "gulp-sourcemaps": "^2.6.5",
+    "tailwindcss": "^1.2.0"
   }
 }
