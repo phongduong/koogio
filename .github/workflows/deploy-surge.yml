@@ -1,0 +1,26 @@
+name: Deploy Surge
+
+on:
+  push:
+    branches: 
+      - master
+    paths: 
+      - "projects/cms-website/**"
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+    - name: npm install, build
+      run: |
+        npm install -g surge
+        npm install gulp-cli -g
+        cd projects/cms-website
+        npm install
+        npm run build
+    - name: Deploy to Surge
+      run: surge ./_site ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+        
