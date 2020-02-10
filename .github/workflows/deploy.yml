@@ -7,8 +7,9 @@ on:
     paths: 
       - "projects/koogio-website/**"
   repository_dispatch:
-  
-
+  schedule:
+    - cron: '* * * * *'
+      
 jobs:
   build:
     runs-on: ubuntu-latest
