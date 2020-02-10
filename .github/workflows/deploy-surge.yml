@@ -16,8 +16,7 @@ jobs:
       uses: actions/setup-node@v1
     - name: npm install, build
       run: |
-        npm install -g surge
-        npm install gulp-cli -g
+        npm install -g surge gulp-cli
         cd projects/cms-website
         npm install
         npm run build
