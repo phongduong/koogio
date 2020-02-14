@@ -27,4 +27,4 @@ jobs:
       with:
         zeit-token: ${{ secrets.ZEIT_TOKEN }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        now-args: './projects/koogio-website/dist --name koogio --prod --public'
+        now-args: './projects/koogio-website/dist --name koogio --prod --public -- confirm'
