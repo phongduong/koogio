@@ -1,15 +1,19 @@
 {
   "name": "koogio-app",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
+  "description": "KOOGIO app",
   "productName": "KOOGIO",
-  "cordovaId": "org.cordova.quasar.app",
+  "cordovaId": "com.koogio.app",
   "capacitorId": "",
   "author": "Phong Duong <s2pkmol@gmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "start": "quasar dev",
+    "start:android": "quasar dev -m capacitor -T android",
+    "build": "quasar build",
+    "build:android": "quasar build -m capacitor -T android"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
