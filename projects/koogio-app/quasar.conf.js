@@ -1,8 +1,9 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
-module.exports = function (ctx) {
+module.exports = function(ctx) {
   return {
+    preFetch: true,
     supportTS: true,
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
@@ -175,4 +176,4 @@ module.exports = function (ctx) {
       }
     }
   };
-}
+};
