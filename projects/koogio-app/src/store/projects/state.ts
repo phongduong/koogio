@@ -1,5 +1,16 @@
-export default function() {
+/// <reference path="./project.d.ts"/>
+
+export default function(): StateInterface {
   return {
-    projects: []
+    projects: [],
+    project: {
+      id: "",
+      title: "",
+      googleLink: "",
+      description: "",
+      icon: "",
+      screenshots: [],
+      createTime: 0
+    }
   };
 }

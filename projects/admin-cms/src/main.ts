@@ -7,6 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.use(cookieParser());
+  app.enableCors();
   app.useStaticAssets("public");
   app.setBaseViewsDir("views");
   app.setViewEngine("pug");

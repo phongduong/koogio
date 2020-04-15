@@ -1,2 +1,1 @@
-export function getter () {
-}
+export default {};

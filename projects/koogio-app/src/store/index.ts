@@ -9,7 +9,7 @@ export default function() {
     modules: {
       projects
     },
-    strict: process.env.DEV
+    strict: <any>process.env.DEV
   });
 
   return Store;

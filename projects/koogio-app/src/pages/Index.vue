@@ -3,7 +3,12 @@
 </template>
 
 <script lang="ts">
+import TYPES from "../store/projects/types";
+
 export default {
-  name: "PageIndex"
+  name: "PageIndex",
+  preFetch({ store, redirect }) {
+    store.dispatch(`projects/${TYPES.GET_PROJECTS}`);
+  }
 };
 </script>
