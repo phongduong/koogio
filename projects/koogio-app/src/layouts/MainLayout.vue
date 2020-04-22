@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar class="bg-white" >
+      <q-toolbar class="bg-white">
         <q-avatar square>
           <img src="statics/app-logo-128x128.png" />
         </q-avatar>

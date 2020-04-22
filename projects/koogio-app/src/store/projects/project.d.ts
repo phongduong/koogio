@@ -9,6 +9,6 @@ declare interface ProjectInterface {
 }
 
 declare interface StateInterface {
-  projects: ProjectInterface[];
+  projects: ProjectInterface[] | never[] | string | null;
   project: ProjectInterface;
 }

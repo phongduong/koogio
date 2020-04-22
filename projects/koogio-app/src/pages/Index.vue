@@ -2,7 +2,7 @@
   <q-page class="flex flex-center">
     <q-list>
       <ProjectItem
-        v-for="(project, index) in projectList"
+        v-for="(project, index) in projects"
         :key="index"
         :project="project"
       />
@@ -11,21 +11,23 @@
 </template>
 
 <script lang="ts">
-import { mapGetters } from "vuex";
+import Vue from "vue";
+import { mapState } from "vuex";
 import TYPES from "../store/projects/types";
-import ProjectItem from "../components/ProjectItem";
+import ProjectItem from "../components/ProjectItem.vue";
 
-export default {
+export default Vue.extend({
   name: "PageIndex",
   components: {
     ProjectItem
   },
-  preFetch({ store, redirect }) {
-    return store.dispatch(`projects/${TYPES.GET_PROJECTS}`);
+  computed: {
+    ...mapState({
+      projects: ({ projects: { projects } }: any) => projects
+    })
   },
-  computed: mapGetters(["projects/projectList"]),
   mounted() {
-    console.log(this.projectList);
-  }
-};
+    this.$store.dispatch(`projects/${TYPES.GET_PROJECTS}`);
+  },
+});
 </script>

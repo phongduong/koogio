@@ -1,8 +1,11 @@
 /// <reference path="./project.d.ts"/>
+import { LocalStorage } from "quasar";
 
 export default function(): StateInterface {
   return {
-    projects: [],
+    projects: LocalStorage.has("projects")
+      ? LocalStorage.getItem("projects")
+      : [],
     project: {
       id: "",
       title: "",
