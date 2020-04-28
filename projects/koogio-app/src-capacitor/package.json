@@ -1,0 +1,12 @@
+{
+  "name": "koogio-app",
+  "version": "0.0.1",
+  "description": "KOOGIO app",
+  "author": "Phong Duong <s2pkmol@gmail.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^2.0.1",
+    "@capacitor/cli": "^1.0.0",
+    "@capacitor/core": "^1.0.0"
+  }
+}

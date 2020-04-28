@@ -1,0 +1,7 @@
+{
+  "appId": "com.koogio.app",
+  "appName": "KOOGIO",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}

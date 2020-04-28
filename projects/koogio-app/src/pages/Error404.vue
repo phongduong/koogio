@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-center text-center">
+  <q-page class="fixed-center text-center">
     <p>
       <img
         src="~assets/sad.svg"
@@ -15,7 +15,7 @@
       to="/"
       label="Go back"
     />
-  </div>
+  </q-page>
 </template>
 
 <script>

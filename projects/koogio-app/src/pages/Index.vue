@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page padding class="flex flex-center">
     <q-list>
       <ProjectItem
         v-for="(project, index) in projects"

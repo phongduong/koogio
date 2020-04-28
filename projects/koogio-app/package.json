@@ -13,7 +13,8 @@
     "start": "quasar dev",
     "start:android": "quasar dev -m capacitor -T android",
     "build": "quasar build",
-    "build:android": "quasar build -m capacitor -T android"
+    "build:android": "quasar build -m capacitor -T android",
+    "generate:icon": "icongenie generate -m capacitor -i app-icon.png"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
