@@ -11,9 +11,6 @@
           class="q-mr-sm"
           @click="drawer = !drawer"
         />
-        <q-avatar square>
-          <img src="statics/app-logo-128x128.png" />
-        </q-avatar>
         <q-toolbar-title class="text-primary">
           KOOGIO
         </q-toolbar-title>

@@ -176,7 +176,8 @@ module.exports = function(ctx) {
       }
     },
     bin: {
-      windowsAndroidStudio: "E:\\Android\\Android Studio\\bin\\studio64.exe"
+      windowsAndroidStudio: "E:\\Android\\Android Studio\\bin\\studio64.exe",
+      linuxAndroidStudio: "/home/phong/Downloads/android-studio/bin/studio.sh"
     }
   };
 };
