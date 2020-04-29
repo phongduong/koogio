@@ -13,7 +13,7 @@
     "start": "quasar dev",
     "start:android": "quasar dev -m cordova -T android",
     "build": "quasar build",
-    "build:android": "quasar build -m cordova -T android --skip-pkg --ide",
+    "build:android": "quasar build -m cordova -T android",
     "generate:icon": "icongenie generate -m cordova -i app-icon.png"
   },
   "dependencies": {
