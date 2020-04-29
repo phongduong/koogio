@@ -11,10 +11,10 @@
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0",
     "start": "quasar dev",
-    "start:android": "quasar dev -m capacitor -T android",
+    "start:android": "quasar dev -m cordova -T android",
     "build": "quasar build",
-    "build:android": "quasar build -m capacitor -T android",
-    "generate:icon": "icongenie generate -m capacitor -i app-icon.png"
+    "build:android": "quasar build -m cordova -T android",
+    "generate:icon": "icongenie generate -m cordova -i app-icon.png"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
