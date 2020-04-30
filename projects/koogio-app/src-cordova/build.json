@@ -1,0 +1,18 @@
+{
+  "android": {
+    "debug": {
+      "keystore": "../koogio-app.keystore",
+      "storePassword": "koogio_app",
+      "alias": "koogio_app",
+      "password": "koogio_app",
+      "keystoreType": ""
+    },
+    "release": {
+      "keystore": "../koogio-app.keystore",
+      "storePassword": "koogio_app",
+      "alias": "koogio_app",
+      "password": "koogio_app",
+      "keystoreType": ""
+    }
+  }
+}
