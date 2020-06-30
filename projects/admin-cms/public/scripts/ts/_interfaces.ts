@@ -19,11 +19,11 @@ export interface IButtonElement extends Element {
 
 export class Data {
   private screenshotURLs: string[];
-  private iconURL: string;
+  private logoURL: string;
 
   constructor() {
     this.screenshotURLs = [];
-    this.iconURL = "";
+    this.logoURL = "";
   }
 
   setScreenshotURLs(screenshotURLs: string[]): void {
@@ -34,11 +34,11 @@ export class Data {
     return this.screenshotURLs;
   }
 
-  setIconURL(iconURL: string): void {
-    this.iconURL = iconURL;
+  setLogoURL(logoURL: string): void {
+    this.logoURL = logoURL;
   }
 
-  getIconURL(): string {
-    return this.iconURL;
+  getLogoURL(): string {
+    return this.logoURL;
   }
 }

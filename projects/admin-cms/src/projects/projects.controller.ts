@@ -11,19 +11,10 @@ import {
 } from "@nestjs/common";
 import { ProjectsService } from "./projects.service";
 import { IProject } from "./project.interface";
-import { ConfigService } from "../config/config.service";
-import axios from "axios";
 
 @Controller("projects")
 export class ProjectsController {
-  private GITHUB_ACCESS_TOKEN: string;
-
-  constructor(
-    private readonly projectsService: ProjectsService,
-    private readonly configService: ConfigService
-  ) {
-    this.GITHUB_ACCESS_TOKEN = configService.get("GITHUB_ACCESS_TOKEN");
-  }
+  constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
   async createProject(@Body() body: IProject, @Res() res): Promise<any> {
@@ -93,18 +84,4 @@ export class ProjectsController {
         .json({ error: error.message });
     }
   }
-
-  // async dispatchGithubWebhook() {
-  //   await axios.post(
-  //     "https://api.github.com/repos/phongduong/koogio/dispatches",
-  //     { event_type: "Deploy ZEIT Now" },
-  //     {
-  //       headers: {
-  //         Accept: "application/vnd.github.everest-preview+json",
-  //         Authorization: `token ${this.GITHUB_ACCESS_TOKEN}`,
-  //         "User-Agent": "phongduong"
-  //       }
-  //     }
-  //   );
-  // }
 }

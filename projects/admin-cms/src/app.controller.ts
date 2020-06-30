@@ -36,10 +36,4 @@ export class AppController {
       return { title: error.message };
     }
   }
-
-  @Get("sign-in")
-  @Render("sign-in")
-  signIn() {
-    return { title: "Sign in", authenticated: false };
-  }
 }

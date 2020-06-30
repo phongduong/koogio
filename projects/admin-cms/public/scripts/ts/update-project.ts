@@ -7,7 +7,7 @@ import {
 } from "./_interfaces";
 import {
   getFieldValue,
-  drawIcon,
+  drawLogo,
   drawScreenshotList,
   drag,
   drop
@@ -16,14 +16,14 @@ import {
 const screenshotsParentNode: Element = document.querySelector(
   "#screenshots__list"
 );
-const iconParentNode: Element = document.querySelector(".icon");
+const logoParentNode: Element = document.querySelector(".logo");
 const saveButton: IButtonElement = document.querySelector(".save-button");
 const screenshotURLs: string[] = [];
 const updateData = new Data();
 
 document.addEventListener("DOMContentLoaded", () => {
-  updateData.setIconURL(
-    (document.querySelector(".icon img") as IImgElement).src
+  updateData.setLogoURL(
+    (document.querySelector(".logo img") as IImgElement).src
   );
   document
     .querySelectorAll("#screenshots__list img")
@@ -61,8 +61,8 @@ document
       const data: string = JSON.stringify({
         title: getFieldValue("title"),
         description: getFieldValue("description"),
-        googleLink: getFieldValue("google-link"),
-        icon: updateData.getIconURL(),
+        url: getFieldValue("url"),
+        logo: updateData.getLogoURL(),
         screenshots: updateData.getScreenshotURLs()
       });
 
@@ -101,7 +101,7 @@ document
   });
 
 document
-  .querySelector("#icon")
+  .querySelector("#logo")
   .addEventListener("change", async (e: HTMLInputEvent) => {
     const {
       target: { files }
@@ -115,8 +115,8 @@ document
         urls: [url]
       } = data;
 
-      updateData.setIconURL(url);
-      drawIcon(iconParentNode, url);
+      updateData.setLogoURL(url);
+      drawLogo(logoParentNode, url);
     } catch (error) {
       console.error(error);
     }

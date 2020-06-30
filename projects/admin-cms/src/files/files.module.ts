@@ -7,8 +7,6 @@ import {
 import { FilesService } from "./files.service";
 import { FilesController } from "./files.controller";
 import { AppModule } from "../app.module";
-import { SercureApiMiddleware } from "../middlewares/sercure-api.middleware";
-import { RouterModule } from "nest-router";
 
 @Module({
   providers: [FilesService],
@@ -16,9 +14,5 @@ import { RouterModule } from "nest-router";
   imports: [forwardRef(() => AppModule)]
 })
 export class FilesModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(SercureApiMiddleware)
-      .forRoutes(RouterModule.resolvePath(FilesController));
-  }
+  configure(consumer: MiddlewareConsumer) {}
 }

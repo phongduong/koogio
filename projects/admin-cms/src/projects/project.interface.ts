@@ -1,7 +1,7 @@
 export interface IProject {
   title: string;
   description: string;
-  googleLink: string;
-  icon: string;
+  url: string;
+  logo: string;
   screenshots: string[];
 }

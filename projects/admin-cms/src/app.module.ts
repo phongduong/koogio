@@ -9,8 +9,6 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ConfigService } from "./config/config.service";
 import { FirebaseService } from "./firebase/firebase.service";
-import { SecureRenderMiddleware } from "./middlewares/secure-render.middleware";
-import { UnsecureRenderMiddleware } from "./middlewares/unsecure-render.middleware";
 import { ApiModule } from "./api/api.module";
 import { ProjectsModule } from "./projects/projects.module";
 import { FilesModule } from "./files/files.module";
@@ -45,11 +43,5 @@ const routes: Routes = [
   ]
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(SecureRenderMiddleware)
-      .exclude({ path: "/sign-in", method: RequestMethod.GET })
-      .forRoutes(AppController);
-    consumer.apply(UnsecureRenderMiddleware).forRoutes("/sign-in");
-  }
+  configure(consumer: MiddlewareConsumer) {}
 }

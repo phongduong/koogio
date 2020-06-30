@@ -24,24 +24,24 @@ block content
           rows="3" 
           required)= data.description
       .form-group
-        label(for="google-link") Google Play link
-        input#google-link(
-          value=data.googleLink
+        label(for="url") URL
+        input#url(
+          value=data.url
           type="url" 
-          name="google-link"
+          name="url"
           class="form-control" 
           placeholder="Link" 
           required)
       .form-group
-        label(for="icon") Icon
-        input#icon(
+        label(for="logo") Logo
+        input#logo(
           type="file" 
-          name="icon" 
+          name="logo" 
           class="form-control")
-      .icon
-        img.icon__item(
-          src=data.icon
-          alt="icon")
+      .logo
+        img.logo__item(
+          src=data.logo
+          alt="logo")
       .form-group
         label(for="screenshots") Screenshots
           span(class="required")
