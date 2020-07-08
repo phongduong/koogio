@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" /> -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="module">
+    import { h, app } from "https://unpkg.com/hyperapp"
+    import View from "./view.js"
+    import State from "./state.js"
+    import { fetchJSONData, setProjectList } from "./actions.js"
+
+    app({
+      node: document.getElementById("app"),
+      view: View,
+      init: [State, [
+        fetchJSONData,
+        {
+          url: `https://hyperapp.dev/tutorial-assets/stories/ocean.json`,
+          onResponse: setProjectList
+        }
+      ]]
+    })
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "electron-app",
+  "version": "1.0.0",
+  "description": "KOOGIO Electron app",
+  "author": "KOOGIO",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "hyperapp": "^2.0.4"
+  },
+  "devDependencies": {
+    "electron": "9.1.0",
+    "node-sass": "^4.14.1"
+  },
+  "build": {
+    "appId": "koogio",
+    "productName": "KOOGIO"
+  }
+}
