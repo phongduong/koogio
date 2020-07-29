@@ -5,10 +5,7 @@ on:
     branches: 
       - master
     paths: 
-      - "projects/koogio-website/**"
-  schedule:
-    - cron: '0 0 * * *'
-      
+      - "projects/koogio-website/**"      
 jobs:
   build:
     runs-on: ubuntu-latest
