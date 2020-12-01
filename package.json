@@ -1,17 +1,20 @@
 {
   "name": "koogio",
   "version": "1.0.0",
-  "description": "KOOGIO collection source code",
   "main": "index.js",
   "repository": "https://github.com/phongduong/koogio",
-  "author": "Phong Duong <s2pkmol@gmail.com>",
+  "author": "Phong Duong <phongduong1710@gmail.com>",
   "license": "MIT",
-  "private": true,
-  "workspaces": [
-    "projects/*"
-  ],
   "scripts": {
-    "heroku-prebuild": "cd projects/admin-cms; yarn",
-    "heroku-postbuild": "cd projects/admin-cms; yarn build"
+    "develop": "gridsome develop",
+    "build": "gridsome build"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.3",
+    "gridsome": "^0.7.23",
+    "node-sass": "^5.0.0",
+    "postcss": "^8.1.10",
+    "sass-loader": "^10.1.0",
+    "tailwindcss": "^2.0.1"
   }
 }

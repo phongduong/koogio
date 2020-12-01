@@ -1,6 +1,0 @@
-- [About](/koogio-document.md)
-- [Admin CMS](/admin-cms.md)
-- [CMS Website](/cms-website.md)
-- [KOOGIO Website](/koogio-website.md)
-- [Desktop App](/desktop-app.md)
-- [Mobile app](/mobile-app.md)
